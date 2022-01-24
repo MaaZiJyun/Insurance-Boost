@@ -1,4 +1,4 @@
-# UPM-Campus-Navigation
+# Insurance Boost
 The Final Project of SSE3151-1: Mobile Application Development
 
 This app allows user to upload their contract/policy to be reviewed to get a free boost to their coverage. The report will be sent to the user and booster package recommendation will be given to the user for free. 
