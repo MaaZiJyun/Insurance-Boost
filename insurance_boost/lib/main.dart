@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:insurance_boost/pages/edit_profile_page.dart';
+import 'package:insurance_boost/pages/settings_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +28,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) {
-          return MyHomePage(title: AppLocalizations.of(context)!.appTitle);
+          // return MyHomePage(title: AppLocalizations.of(context)!.appTitle);
+          return SettingsPage();
         },
         // '/settings': (context) => Settings(),
       },
