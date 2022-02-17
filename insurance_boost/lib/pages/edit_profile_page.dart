@@ -1,17 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:insurance_boost/pages/settings_page.dart';
 
-// class SettingsUI extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       title: "Setting UI",
-//       home: EditProfilePage(),
-//     );
-//   }
-// }
-
 class EditProfilePage extends StatefulWidget {
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
@@ -34,18 +23,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
             Navigator.of(context).pop();
           },
         ),
-        // actions: [
-        //   IconButton(
-        //     icon: Icon(
-        //       Icons.settings,
-        //       color: Colors.grey[800],
-        //     ),
-        //     onPressed: () {
-        //       Navigator.of(context).push(MaterialPageRoute(
-        //           builder: (BuildContext context) => SettingsPage()));
-        //     },
-        //   ),
-        // ],
       ),
       body: Container(
         padding: EdgeInsets.only(left: 16, top: 25, right: 16),
@@ -125,16 +102,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
                     child: Text("CANCEL",
                         style: TextStyle(
                             fontSize: 14,
                             letterSpacing: 2.2,
-                            color: Colors.black)),
+                            color: Colors.teal)),
                   ),
                   RaisedButton(
                     onPressed: () {},
-                    color: Colors.grey[800],
+                    color: Colors.teal,
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     elevation: 2,
                     shape: RoundedRectangleBorder(

@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:insurance_boost/global/global_variables.dart' as globals;
 import 'package:insurance_boost/models/account_option_row.dart';
+import 'package:insurance_boost/models/change_password_option.dart';
+import 'package:insurance_boost/models/change_pwd_row.dart';
 import 'package:insurance_boost/models/notification_option_row.dart';
 import 'package:insurance_boost/pages/edit_profile_page.dart';
 
@@ -76,9 +78,8 @@ class _SettingsPageState extends State<SettingsPage> {
             AccountOptionRow(
               title: 'My Profile',
             ),
-            buildAccountOptionRow(context, "Change password"),
+            ChangePwdRow(title: "Change Password"),
             buildAccountOptionRow(context, "Language"),
-            buildAccountOptionRow(context, "Privacy and security"),
             SizedBox(
               height: 50,
             ),
@@ -104,10 +105,8 @@ class _SettingsPageState extends State<SettingsPage> {
             SizedBox(
               height: 10,
             ),
-            // buildNotificationOptionRow("New for you", globals.NOTE_DELIVER),
-            // buildNotificationOptionRow("Night Mode", globals.NIGHT_MODE),
             NotificationOpetionRow(
-              title: "New for you",
+              title: "News for you",
               isActive: globals.NOTE_DELIVER,
             ),
             NotificationOpetionRow(

@@ -28,7 +28,7 @@ class _NotificationOpetionRowState extends State<NotificationOpetionRow> {
           Transform.scale(
             scale: 0.7,
             child: CupertinoSwitch(
-              activeColor: Colors.lightGreen[300],
+              activeColor: Colors.teal,
               value: widget.isActive,
               onChanged: (bool value) => setState(() {
                 widget.isActive = value;
