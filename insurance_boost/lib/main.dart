@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:insurance_boost/pages/change_pwd_page.dart';
 import 'package:insurance_boost/pages/edit_profile_page.dart';
 import 'package:insurance_boost/pages/settings_page.dart';
+import 'package:insurance_boost/pages/splash_page.dart';
 import 'package:insurance_boost/pages/welcome_Screen.dart';
 
 void main() {
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       initialRoute: '/',
       routes: {
-        '/': (context) => WelcomeScreen(),
+        '/': (context) => SplashPage(),
+        'SettingsPage': (context) => SettingsPage(),
         '/EditProfilePage': (context) => EditProfilePage(),
         '/ChangePwdPage': (context) => ChangePwdPage(),
         // '/settings': (context) => Settings(),
