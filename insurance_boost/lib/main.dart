@@ -27,10 +27,8 @@ class MyApp extends StatelessWidget {
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       initialRoute: '/',
       routes: {
-        '/': (context) {
-          // return MyHomePage(title: AppLocalizations.of(context)!.appTitle);
-          return SettingsPage();
-        },
+        '/': (context) => SettingsPage(),
+        '/EditProfilePage': (context) => EditProfilePage(),
         // '/settings': (context) => Settings(),
       },
     );

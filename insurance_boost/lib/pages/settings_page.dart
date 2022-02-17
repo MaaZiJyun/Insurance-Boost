@@ -75,8 +75,6 @@ class _SettingsPageState extends State<SettingsPage> {
             // buildAccountOptionRow(context, "My Profile"),
             AccountOptionRow(
               title: 'My Profile',
-              function: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => EditProfilePage())),
             ),
             buildAccountOptionRow(context, "Change password"),
             buildAccountOptionRow(context, "Language"),

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class AccountOptionRow extends StatefulWidget {
   final String title;
-  final Function function;
+  // final Function function;
 
-  AccountOptionRow({required this.title, required this.function});
+  AccountOptionRow({required this.title});
 
   @override
   _AccountOptionRowState createState() => _AccountOptionRowState();
@@ -15,8 +15,9 @@ class _AccountOptionRowState extends State<AccountOptionRow> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        widget.function;
-        print("Navigator");
+        // widget.function;
+        // print("Navigator");
+        Navigator.pushNamed(context, '/EditProfilePage');
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
