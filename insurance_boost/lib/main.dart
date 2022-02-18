@@ -4,9 +4,10 @@ import 'package:insurance_boost/pages/change_pwd_page.dart';
 import 'package:insurance_boost/pages/edit_profile_page.dart';
 import 'package:insurance_boost/global/global_variables.dart' as globals;
 import 'package:insurance_boost/pages/home_page.dart';
-import 'package:insurance_boost/pages/home_screen.dart';
+import 'package:insurance_boost/pages/home_welcome.dart';
 import 'package:insurance_boost/pages/login_signup/login_screen.dart';
 import 'package:insurance_boost/pages/login_signup/signup_sreen.dart';
+import 'package:insurance_boost/pages/package_page.dart';
 import 'package:insurance_boost/pages/settings_page.dart';
 import 'package:insurance_boost/pages/splash_page.dart';
 import 'package:insurance_boost/pages/welcome_Screen.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       initialRoute: '/',
       routes: {
-        '/': (context) => LoginScreen(),
+        '/': (context) => PackagePage(),
         '/WelcomeScreen': (context) => WelcomeScreen(),
         '/LoginScreen': (context) => LoginScreen(),
         '/SignupScreen': (context) => SignupScreen(),
