@@ -1,4 +1,8 @@
-import 'package:insurance_boost/utils/exports.dart';
+import 'package:flutter/material.dart';
+import 'package:insurance_boost/pages/auth/signup_sreen.dart';
+import 'package:insurance_boost/pages/welcome_Screen.dart';
+import 'package:insurance_boost/utils/appColors.dart';
+import 'package:insurance_boost/utils/code_refector.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -20,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Center(
               child: Padding(
                 padding:
-                const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[

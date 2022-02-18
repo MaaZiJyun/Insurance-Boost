@@ -1,13 +1,17 @@
-import 'package:insurance_boost/utils/exports.dart';
+import 'package:flutter/material.dart';
+import 'package:insurance_boost/pages/auth/login_screen.dart';
+import 'package:insurance_boost/utils/appColors.dart';
+import 'package:insurance_boost/utils/code_refector.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({Key? key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _SignupScreenState createState() => _SignupScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _SignupScreenState extends State<SignupScreen> {
+  bool _value = false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -18,12 +22,12 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Center(
               child: Padding(
                 padding:
-                const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     customText(
-                        txt: "Welcome",
+                        txt: "Sign Up",
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 26,
@@ -32,18 +36,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 8,
                     ),
                     customText(
-                        txt:
-                        "Please login or sign up to continue using our app.",
+                        txt: "Please sign up to enter in a app.",
                         style: const TextStyle(
                           fontWeight: FontWeight.normal,
                           fontSize: 14,
                         )),
                     const SizedBox(
-                      height: 30,
-                    ),
-                    Image.asset("image/img1.png"),
-                    const SizedBox(
-                      height: 50,
+                      height: 60,
                     ),
                     customText(
                         txt: "Enter via social networks",
@@ -79,14 +78,35 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontSize: 14,
                         )),
                     const SizedBox(
-                      height: 50,
+                      height: 30,
                     ),
+                    const SizedBox(height: 20),
+                    CustomTextField(Lone: "Email", Htwo: "Email"),
+                    const SizedBox(height: 20),
+                    CustomTextField(Lone: "Password", Htwo: "Password"),
+                    const SizedBox(height: 20),
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: _value,
+                          onChanged: (newValue) {
+                            setState(() {
+                              _value = newValue!;
+                            });
+                            const Text(
+                              "Remember me",
+                              style: TextStyle(
+                                  fontSize: 13, color: AppColors.kBlackColor),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 40),
                     InkWell(
                       child: SignUpContainer(st: "Sign Up"),
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const SignupScreen()));
-                      },
+                      onTap: () {},
                     ),
                     const SizedBox(
                       height: 50,
@@ -94,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     InkWell(
                       child: RichText(
                         text: RichTextSpan(
-                            one: "Don’t have an account ? ", two: "LogIn"),
+                            one: "Already have an account ? ", two: "Login"),
                       ),
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
