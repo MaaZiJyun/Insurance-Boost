@@ -1,4 +1,5 @@
 import 'package:insurance_boost/utils/exports.dart';
+import 'package:social_login_buttons/social_login_buttons.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -52,16 +53,19 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                     Row(
                       children: [
-                        InkWell(
-                          child: InkwellButtons(
-                              image: Image.asset("image/img3.png")),
-                          onTap: () {},
+                        SocialLoginButton(
+                          buttonType: SocialLoginButtonType.google,
+                          onPressed: () {},
                         ),
                         const SizedBox(width: 37),
-                        InkWell(
-                          child: InkwellButtons(
-                              image: Image.asset("image/img4.png")),
-                          onTap: () {},
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        const SizedBox(width: 37),
+                        SocialLoginButton(
+                          buttonType: SocialLoginButtonType.google,
+                          onPressed: () {},
                         ),
                       ],
                     ),
