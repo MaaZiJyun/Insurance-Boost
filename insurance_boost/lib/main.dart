@@ -7,6 +7,7 @@ import 'package:insurance_boost/pages/edit_profile_page.dart';
 import 'package:insurance_boost/global/global_variables.dart' as globals;
 import 'package:insurance_boost/pages/home/home_page.dart';
 import 'package:insurance_boost/pages/home_welcome.dart';
+import 'package:insurance_boost/pages/index_page.dart';
 import 'package:insurance_boost/pages/package_page.dart';
 import 'package:insurance_boost/pages/reward_page.dart';
 import 'package:insurance_boost/pages/settings_page.dart';
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
         '/WelcomeScreen': (context) => WelcomeScreen(),
         '/LoginScreen': (context) => LoginScreen(),
         '/SignupScreen': (context) => SignupScreen(),
-        '/Home': (context) => HomePage(),
+        '/Home': (context) => IndexPage(),
         '/SettingsPage': (context) => SettingsPage(),
         '/EditProfilePage': (context) => EditProfilePage(),
         '/ChangePwdPage': (context) => ChangePwdPage(),
