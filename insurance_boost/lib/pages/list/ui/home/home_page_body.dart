@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_planets_tutorial/model/planets.dart';
+import 'package:insurance_boost/pages/list/model/planets.dart';
 
 import 'planet_row.dart';
 
@@ -17,7 +17,7 @@ class HomePageBody extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 24.0),
               sliver: new SliverList(
                 delegate: new SliverChildBuilderDelegate(
-                    (context, index) => new PlanetRow(planets[index]),
+                  (context, index) => new PlanetRow(planets[index]),
                   childCount: planets.length,
                 ),
               ),
