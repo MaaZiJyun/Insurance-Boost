@@ -8,7 +8,7 @@ import 'package:insurance_boost/global/global_variables.dart' as globals;
 import 'package:insurance_boost/pages/home/home_page.dart';
 import 'package:insurance_boost/pages/home_welcome.dart';
 import 'package:insurance_boost/pages/index_page.dart';
-import 'package:insurance_boost/pages/list/ui/home/home_page_body.dart';
+import 'package:insurance_boost/pages/list/ui/home/list_page_body.dart';
 import 'package:insurance_boost/pages/recomended_list_page.dart';
 import 'package:insurance_boost/pages/reward_page.dart';
 import 'package:insurance_boost/pages/settings_page.dart';
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       initialRoute: '/',
       routes: {
-        '/': (context) => HomePageBody(),
+        '/': (context) => LoginScreen(),
         '/WelcomeScreen': (context) => WelcomeScreen(),
         '/LoginScreen': (context) => LoginScreen(),
         '/SignupScreen': (context) => SignupScreen(),
