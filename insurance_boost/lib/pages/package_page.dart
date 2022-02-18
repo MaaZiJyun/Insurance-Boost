@@ -217,70 +217,7 @@ class PackagePage extends StatelessWidget {
               height: 400,
               child: Padding(
                 padding: const EdgeInsets.all(13.0),
-                child: StaggeredGridView.countBuilder(
-                  crossAxisCount: 4,
-                  itemCount: 4,
-                  itemBuilder: (BuildContext context, int index) => Material(
-                    elevation: 1,
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(6),
-                    child: Column(
-                      children: <Widget>[
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Image.asset(
-                          images[index],
-                          height: 100,
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  text[index],
-                                  style: GoogleFonts.lato(
-                                      color: Colors.grey[600],
-                                      fontSize: 14,
-                                      letterSpacing: 0.6,
-                                      fontWeight: FontWeight.normal),
-                                ),
-                                Text(
-                                  '\$30',
-                                  style: GoogleFonts.lato(
-                                      color: Colors.grey[800],
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                            Material(
-                                color: Color(iconcolor[index]),
-                                borderRadius: BorderRadius.circular(6),
-                                elevation: 6,
-                                child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Icon(
-                                      Icons.shopping_bag_outlined,
-                                      color: Colors.white,
-                                    ))),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                      ],
-                    ),
-                  ),
-                  staggeredTileBuilder: (int index) => new StaggeredTile.fit(2),
-                  mainAxisSpacing: 24.0,
-                  crossAxisSpacing: 14.0,
-                ),
+
               ),
             ),
             SizedBox(
