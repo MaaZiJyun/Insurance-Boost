@@ -9,22 +9,22 @@ class Product {
 }
 
 class RecomendList extends StatelessWidget {
-  List products = [
-    Product(
-        'https://lh3.googleusercontent.com/proxy/2gvngPLBf-XuU77M62l_Wcr-8YSArI-PVfKHVKhf2zqwv2c8WAnt-EWwK0nUTtQM4SOT4ItbAd4rmRDtyg5k5htcIT_4Mu6X2FmbWTSZT6Uj5BJuSWMwy5NplZO15iA9BjrstZYI',
-        'Camera canon',
-        2000),
-    Product(
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSdygFdB_FfadQmmrDZUgLeJTILZBTU0d9Ffs3mLpYSh2rulaJo&usqp=CAU',
-        'Camera canon',
-        2000),
-  ];
+  // List products = [
+  //   Product(
+  //       'https://lh3.googleusercontent.com/proxy/2gvngPLBf-XuU77M62l_Wcr-8YSArI-PVfKHVKhf2zqwv2c8WAnt-EWwK0nUTtQM4SOT4ItbAd4rmRDtyg5k5htcIT_4Mu6X2FmbWTSZT6Uj5BJuSWMwy5NplZO15iA9BjrstZYI',
+  //       'Camera canon',
+  //       2000),
+  //   Product(
+  //       'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSdygFdB_FfadQmmrDZUgLeJTILZBTU0d9Ffs3mLpYSh2rulaJo&usqp=CAU',
+  //       'Camera canon',
+  //       2000),
+  // ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xfff6f7f9),
       appBar: AppBar(
-        title: Text('Buyings'),
+        title: Text('Recomended List'),
       ),
       body: ListView(
         children: <Widget>[
