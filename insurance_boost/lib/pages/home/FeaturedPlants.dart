@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:insurance_boost/pages/detail_pages/pdf_detail_page.dart';
+import 'package:insurance_boost/pages/detail_pages/submission_detail_page.dart';
 
 // import '../../../constants.dart';
 
@@ -15,7 +19,14 @@ class FeaturedPlants extends StatelessWidget {
         children: <Widget>[
           FeaturePlantCard(
             image: "image/img2.png",
-            press: () {},
+            press: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SubmissionDetailPage(),
+                ),
+              );
+            },
           ),
           FeaturePlantCard(
             image: "image/img2.png",
@@ -40,7 +51,7 @@ class FeaturePlantCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return GestureDetector(
-      onTap: press(),
+      onTap: () => press(),
       child: Container(
         margin: EdgeInsets.only(
           left: 20,

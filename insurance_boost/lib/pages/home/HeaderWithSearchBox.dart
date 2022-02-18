@@ -75,7 +75,7 @@ class HeaderWithSearchBox extends StatelessWidget {
                         ),
                         enabledBorder: InputBorder.none,
                         focusedBorder: InputBorder.none,
-                        // surffix isn't working properly  with SVG
+                        // surffix isn't working properly with SVG
                         // thats why we use row
                         // suffixIcon: SvgPicture.asset("assets/icons/search.svg"),
                       ),

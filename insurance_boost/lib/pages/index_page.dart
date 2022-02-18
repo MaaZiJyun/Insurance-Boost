@@ -95,7 +95,9 @@ class _IndexPageState extends State<IndexPage> {
               accountEmail: new Text('example@126.com'), //用户邮箱
               currentAccountPicture: new GestureDetector(
                 //用户头像
-                onTap: () => print('current user'),
+                onTap: () {
+                  Navigator.pushNamed(context, '/EditProfilePage');
+                },
                 child: new CircleAvatar(
                   //圆形图标控件
                   backgroundImage: new NetworkImage(
@@ -107,25 +109,27 @@ class _IndexPageState extends State<IndexPage> {
               ),
             ),
             new ListTile(
-                //第二个功能项
                 title: new Text('My Profile'),
                 trailing: new Icon(Icons.person),
-                onTap: () {}),
+                onTap: () {
+                  Navigator.pushNamed(context, '/EditProfilePage');
+                }),
             new ListTile(
-                //第二个功能项
                 title: new Text('Settings'),
                 trailing: new Icon(Icons.settings),
-                onTap: () {}),
+                onTap: () {
+                  Navigator.pushNamed(context, '/SettingsPage');
+                }),
             new ListTile(
-                //第二个功能项
-                title: new Text('Reward'),
-                trailing: new Icon(Icons.widgets_rounded),
-                onTap: () {}),
-            new ListTile(
-                //第二个功能项
                 title: new Text('Share this App'),
                 trailing: new Icon(Icons.share),
                 onTap: () {}),
+            new ListTile(
+                title: new Text('About Us'),
+                trailing: new Icon(Icons.group),
+                onTap: () {
+                  Navigator.pushNamed(context, '/AboutPage');
+                }),
             new Divider(), //分割线控件
           ],
         ),
