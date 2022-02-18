@@ -113,12 +113,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
 
                     const SizedBox(height: 40),
-                    InkWell(
-                      child: SignUpContainer(st: "LogIn"),
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const WelcomeScreen()));
-                      },
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Text('Sign Up'),
+                      style: ElevatedButton.styleFrom(
+                        shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(40.0),
+                        ),
+                        primary: Colors.teal,
+                        onPrimary: Colors.white,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                      ),
                     ),
                     const SizedBox(
                       height: 25,

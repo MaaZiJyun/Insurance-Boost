@@ -112,8 +112,13 @@ class _SignupScreenState extends State<SignupScreen> {
                       onPressed: () {},
                       child: Text('Sign Up'),
                       style: ElevatedButton.styleFrom(
+                        shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(40.0),
+                        ),
                         primary: Colors.teal,
                         onPrimary: Colors.white,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                       ),
                     ),
 
