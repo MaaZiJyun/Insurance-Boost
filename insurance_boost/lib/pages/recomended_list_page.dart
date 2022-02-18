@@ -22,7 +22,7 @@ class RecomendList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(211, 14, 3, 19),
+      backgroundColor: Color(0xfff6f7f9),
       appBar: AppBar(
         title: Text('Buyings'),
       ),
@@ -31,28 +31,28 @@ class RecomendList extends StatelessWidget {
           Container(
             margin: EdgeInsets.symmetric(vertical: 2, horizontal: 10),
             height: 50,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                'Featured item',
-                'Most recent',
-                'Item 1',
-                'Item 2',
-                'Item 3',
-                'Etc...'
-              ]
-                  .map((e) => Container(
-                        margin: EdgeInsets.symmetric(
-                            vertical: 8.0, horizontal: 8.0),
-                        child: OutlineButton(
-                          onPressed: () {},
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30)),
-                          child: Text(e),
-                        ),
-                      ))
-                  .toList(),
-            ),
+            // child: ListView(
+            //   scrollDirection: Axis.horizontal,
+            //   children: [
+            //     'Featured item',
+            //     'Most recent',
+            //     'Item 1',
+            //     'Item 2',
+            //     'Item 3',
+            //     'Etc...'
+            //   ]
+            //       .map((e) => Container(
+            //             margin: EdgeInsets.symmetric(
+            //                 vertical: 8.0, horizontal: 8.0),
+            //             child: OutlineButton(
+            //               onPressed: () {},
+            //               shape: RoundedRectangleBorder(
+            //                   borderRadius: BorderRadius.circular(30)),
+            //               child: Text(e),
+            //             ),
+            //           ))
+            //       .toList(),
+            // ),
           ),
           Column(
               children: products
@@ -65,6 +65,7 @@ class RecomendList extends StatelessWidget {
                         borderRadius: BorderRadius.circular(13),
                         boxShadow: [
                           BoxShadow(
+                              color: const Color(0xFF000000),
                               blurRadius: 10,
                               spreadRadius: 3,
                               offset: Offset(3, 4))
