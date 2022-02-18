@@ -35,7 +35,7 @@ class _ChangePwdPageState extends State<ChangePwdPage> {
         margin: EdgeInsets.all(height * 0.05),
         child: Form(
           key: _formKey,
-          child: Center(
+          child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,

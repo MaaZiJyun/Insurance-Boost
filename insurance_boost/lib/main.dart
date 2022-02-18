@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:insurance_boost/pages/about_page.dart';
 import 'package:insurance_boost/pages/auth/login_screen.dart';
 import 'package:insurance_boost/pages/auth/signup_sreen.dart';
 import 'package:insurance_boost/pages/change_pwd_page.dart';
+import 'package:insurance_boost/pages/detail_pages/pdf_detail_page.dart';
 import 'package:insurance_boost/pages/edit_profile_page.dart';
 import 'package:insurance_boost/global/global_variables.dart' as globals;
 import 'package:insurance_boost/pages/home/home_page.dart';
@@ -48,6 +50,8 @@ class MyApp extends StatelessWidget {
         '/SettingsPage': (context) => SettingsPage(),
         '/EditProfilePage': (context) => EditProfilePage(),
         '/ChangePwdPage': (context) => ChangePwdPage(),
+        '/RewardPage': (context) => DashBoardPage(),
+        '/AboutPage': (context) => AboutPage(),
       },
     );
   }
