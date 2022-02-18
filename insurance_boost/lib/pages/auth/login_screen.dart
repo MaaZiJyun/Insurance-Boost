@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontSize: 14,
                         )),
                     const SizedBox(
-                      height: 60,
+                      height: 15,
                     ),
                     customText(
                         txt: "Enter via social networks",
@@ -53,14 +53,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontSize: 14,
                         )),
                     const SizedBox(
-                      height: 30,
+                      height: 15,
                     ),
                     SocialLoginButton(
                       buttonType: SocialLoginButtonType.google,
                       onPressed: () {},
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     SocialLoginButton(
                       buttonType: SocialLoginButtonType.facebook,
@@ -68,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
 
                     const SizedBox(
-                      height: 50,
+                      height: 25,
                     ),
                     customText(
                         txt: "or login with email",
@@ -113,15 +113,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
 
                     const SizedBox(height: 40),
-                    InkWell(
-                      child: SignUpContainer(st: "LogIn"),
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const WelcomeScreen()));
-                      },
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Text('Sign Up'),
+                      style: ElevatedButton.styleFrom(
+                        shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(40.0),
+                        ),
+                        primary: Colors.teal,
+                        onPrimary: Colors.white,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                      ),
                     ),
                     const SizedBox(
-                      height: 50,
+                      height: 25,
                     ),
                     InkWell(
                       child: RichText(
