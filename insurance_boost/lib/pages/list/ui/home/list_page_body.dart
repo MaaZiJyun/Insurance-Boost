@@ -3,7 +3,7 @@ import 'package:insurance_boost/pages/list/model/planets.dart';
 
 import 'planet_row.dart';
 
-class HomePageBody extends StatelessWidget {
+class ListPageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Expanded(

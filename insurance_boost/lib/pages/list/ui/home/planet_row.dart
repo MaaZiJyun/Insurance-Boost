@@ -31,7 +31,7 @@ class PlanetRow extends StatelessWidget {
       return new Row(children: <Widget>[
         new Image.asset(image, height: 12.0),
         new Container(width: 8.0),
-        new Text(planet.gravity, style: regularTextStyle),
+        new Text(planet.date, style: regularTextStyle),
       ]);
     }
 
@@ -42,9 +42,9 @@ class PlanetRow extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           new Container(height: 4.0),
-          new Text(planet.name, style: headerTextStyle),
+          new Text(planet.package, style: headerTextStyle),
           new Container(height: 10.0),
-          new Text(planet.location, style: subHeaderTextStyle),
+          new Text(planet.user, style: subHeaderTextStyle),
           new Container(
               margin: new EdgeInsets.symmetric(vertical: 8.0),
               height: 2.0,
@@ -54,12 +54,11 @@ class PlanetRow extends StatelessWidget {
             children: <Widget>[
               new Expanded(
                   child: _planetValue(
-                      value: planet.distance,
+                      value: planet.style,
                       image: 'assets/img/ic_distance.png')),
               new Expanded(
                   child: _planetValue(
-                      value: planet.gravity,
-                      image: 'assets/img/ic_gravity.png'))
+                      value: planet.date, image: 'assets/img/ic_gravity.png'))
             ],
           ),
         ],

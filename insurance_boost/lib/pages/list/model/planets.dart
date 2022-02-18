@@ -1,18 +1,18 @@
 class Planet {
   final String id;
-  final String name;
-  final String location;
-  final String distance;
-  final String gravity;
+  final String package;
+  final String user;
+  final String style;
+  final String date;
   final String description;
   final String image;
 
   const Planet(
       {required this.id,
-      required this.name,
-      required this.location,
-      required this.distance,
-      required this.gravity,
+      required this.package,
+      required this.user,
+      required this.style,
+      required this.date,
       required this.description,
       required this.image});
 }
@@ -20,47 +20,52 @@ class Planet {
 List<Planet> planets = [
   const Planet(
     id: "1",
-    name: "Mars",
-    location: "Milkyway Galaxy",
-    distance: "54.6m Km",
-    gravity: "3.711 m/s ",
+    package: "page1",
+    user: "user1",
+    style: "medical",
+    date: "2022/2/8 ",
     description: "Lorem ipsum...",
     image: "assets/img/mars.png",
   ),
   const Planet(
     id: "2",
-    name: "Neptune",
-    location: "Milkyway Galaxy",
-    distance: "54.6m Km",
-    gravity: "3.711 m/s ",
+    package: "page1",
+    user: "user1",
+    style: "medical",
+    date: "2022/2/8 ",
     description: "Lorem ipsum...",
     image: "assets/img/neptune.png",
   ),
   const Planet(
     id: "3",
-    name: "Moon",
-    location: "Milkyway Galaxy",
-    distance: "54.6m Km",
-    gravity: "3.711 m/s ",
+    package: "page1",
+    user: "user1",
+    style: "medical",
+    date: "2022/2/8 ",
     description: "Lorem ipsum...",
     image: "assets/img/moon.png",
   ),
   const Planet(
     id: "4",
-    name: "Earth",
-    location: "Milkyway Galaxy",
-    distance: "54.6m Km",
-    gravity: "3.711 m/s ",
+    package: "page1",
+    user: "user1",
+    style: "medical",
+    date: "2022/2/8 ",
     description: "Lorem ipsum...",
     image: "assets/img/earth.png",
   ),
   const Planet(
     id: "5",
-    name: "Mercury",
-    location: "Milkyway Galaxy",
-    distance: "54.6m Km",
-    gravity: "3.711 m/s ",
+    package: "page1",
+    user: "user1",
+    style: "medical",
+    date: "2022/2/8 ",
     description: "Lorem ipsum...",
+    // name: "page1",
+    // location: "user1",
+    // distance: "medical",
+    // gravity: "2022/2/8 ",
+    // description: "Lorem ipsum...",
     image: "assets/img/mercury.png",
   ),
 ];
