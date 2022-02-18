@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:insurance_boost/pages/auth/login_screen.dart';
-import 'package:insurance_boost/utils/appColors.dart';
-import 'package:insurance_boost/utils/code_refector.dart';
+import 'package:insurance_boost/utils/exports.dart';
+import 'package:social_login_buttons/social_login_buttons.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -53,23 +51,19 @@ class _SignupScreenState extends State<SignupScreen> {
                     const SizedBox(
                       height: 30,
                     ),
-                    Row(
-                      children: [
-                        InkWell(
-                          child: InkwellButtons(
-                              image: Image.asset("image/img3.png")),
-                          onTap: () {},
-                        ),
-                        const SizedBox(width: 37),
-                        InkWell(
-                          child: InkwellButtons(
-                              image: Image.asset("image/img4.png")),
-                          onTap: () {},
-                        ),
-                      ],
+                    SocialLoginButton(
+                      buttonType: SocialLoginButtonType.google,
+                      onPressed: () {},
                     ),
                     const SizedBox(
-                      height: 50,
+                      height: 20,
+                    ),
+                    SocialLoginButton(
+                      buttonType: SocialLoginButtonType.facebook,
+                      onPressed: () {},
+                    ),
+                    const SizedBox(
+                      height: 25,
                     ),
                     customText(
                         txt: "or login with email",
@@ -103,14 +97,25 @@ class _SignupScreenState extends State<SignupScreen> {
                       ],
                     ),
 
-                    const SizedBox(height: 40),
-                    InkWell(
-                      child: SignUpContainer(st: "Sign Up"),
-                      onTap: () {},
+                    const SizedBox(height: 10),
+                    // InkWell(
+                    //   child: SignUpContainer(st: "Sign Up"),
+                    //   focusColor: Colors.green,
+                    //   highlightColor:Colors.green,
+                    //   hoverColor: Colors.orange,
+                    //
+                    //   onTap: () {},
+                    // ),
+
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Text('Sign Up'),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.teal,
+                        onPrimary: Colors.white,
+                      ),
                     ),
-                    const SizedBox(
-                      height: 50,
-                    ),
+
                     InkWell(
                       child: RichText(
                         text: RichTextSpan(
