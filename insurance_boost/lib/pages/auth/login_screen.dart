@@ -62,12 +62,19 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () {},
                         ),
                         const SizedBox(width: 37),
-                        SocialLoginButton(
-                          buttonType: SocialLoginButtonType.apple,
-                          onPressed: () {},
-                        ),
+
                       ],
                     ),
+                    Row(
+                      children: [
+                        SocialLoginButton(
+                          buttonType: SocialLoginButtonType.facebook,
+                          onPressed: () {},
+                        ),
+
+                      ],
+                    ),
+
                     const SizedBox(
                       height: 50,
                     ),
