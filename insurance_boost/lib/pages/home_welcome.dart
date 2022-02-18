@@ -1,3 +1,5 @@
+import 'package:insurance_boost/pages/auth/login_screen.dart';
+import 'package:insurance_boost/pages/auth/signup_sreen.dart';
 import 'package:insurance_boost/utils/exports.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Center(
               child: Padding(
                 padding:
-                const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
@@ -33,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     customText(
                         txt:
-                        "Please login or sign up to continue using our app.",
+                            "Please login or sign up to continue using our app.",
                         style: const TextStyle(
                           fontWeight: FontWeight.normal,
                           fontSize: 14,
