@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Row(
                       children: [
                         SocialLoginButton(
-                          buttonType: SocialLoginButtonType.apple,
+                          buttonType: SocialLoginButtonType.facebook,
                           onPressed: () {},
                         ),
 
