@@ -37,7 +37,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
     } else {
       setState(() {
         // logoImage = 'assets/images/wallet_logo.png';
-        _borderContainer = Color.fromARGB(255, 0, 192, 192);
+        _borderContainer = Colors.teal;
         _backgroundColor = [
           Color.fromRGBO(249, 249, 249, 1),
           Color.fromRGBO(241, 241, 241, 1),
@@ -47,10 +47,10 @@ class _DashBoardPageState extends State<DashBoardPage> {
         _iconColor = Colors.white;
         _textColor = Colors.white;
         _actionContainerColor = [
-          Color.fromARGB(255, 0, 160, 160),
-          Color.fromARGB(255, 0, 160, 160),
-          Color.fromARGB(255, 0, 160, 160),
-          Color.fromARGB(255, 0, 160, 160),
+          Colors.teal,
+          Colors.teal,
+          Colors.teal,
+          Colors.teal,
         ];
       });
     }
@@ -79,11 +79,13 @@ class _DashBoardPageState extends State<DashBoardPage> {
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                    stops: [0.2, 0.3, 0.5, 0.8],
-                    colors: _backgroundColor)),
+              // gradient: LinearGradient(
+              //     begin: Alignment.centerLeft,
+              //     end: Alignment.centerRight,
+              //     stops: [0.2, 0.3, 0.5, 0.8],
+              //     colors: _backgroundColor)
+              color: Colors.teal[100],
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -116,23 +118,23 @@ class _DashBoardPageState extends State<DashBoardPage> {
                 Container(
                   height: 500.0,
                   width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      color: _borderContainer,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          topRight: Radius.circular(15))),
+                  // decoration: BoxDecoration(
+                  //     color: _borderContainer,
+                  //     borderRadius: BorderRadius.only(
+                  //         topLeft: Radius.circular(15),
+                  //         topRight: Radius.circular(15))),
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Container(
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(15),
-                              topRight: Radius.circular(15)),
-                          gradient: LinearGradient(
-                              begin: Alignment.centerLeft,
-                              end: Alignment.centerRight,
-                              stops: [0.2, 0.4, 0.6, 0.8],
-                              colors: _actionContainerColor)),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
+                          bottomRight: Radius.circular(30),
+                          bottomLeft: Radius.circular(30),
+                        ),
+                        color: Colors.teal,
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -140,7 +142,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
                           Container(
                             height: 80,
                             child: Center(
-                              child: ListView(
+                              child: Column(
                                 children: <Widget>[
                                   Text(
                                     '790',
