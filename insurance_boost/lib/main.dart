@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:insurance_boost/pages/change_pwd_page.dart';
 import 'package:insurance_boost/pages/edit_profile_page.dart';
+import 'package:insurance_boost/global/global_variables.dart' as globals;
+import 'package:insurance_boost/pages/home_page.dart';
+import 'package:insurance_boost/pages/home_screen.dart';
+import 'package:insurance_boost/pages/login_signup/login_screen.dart';
+import 'package:insurance_boost/pages/login_signup/signup_sreen.dart';
 import 'package:insurance_boost/pages/settings_page.dart';
 import 'package:insurance_boost/pages/splash_page.dart';
 import 'package:insurance_boost/pages/welcome_Screen.dart';
@@ -18,6 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      // themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) {
         return AppLocalizations.of(context)!.appTitle;
@@ -31,58 +37,14 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => SplashPage(),
-        'SettingsPage': (context) => SettingsPage(),
+        '/WelcomeScreen': (context) => WelcomeScreen(),
+        '/LoginScreen': (context) => LoginScreen(),
+        '/SignupScreen': (context) => SignupScreen(),
+        '/Home': (context) => HomePage(),
+        '/SettingsPage': (context) => SettingsPage(),
         '/EditProfilePage': (context) => EditProfilePage(),
         '/ChangePwdPage': (context) => ChangePwdPage(),
-        // '/settings': (context) => Settings(),
       },
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
     );
   }
 }

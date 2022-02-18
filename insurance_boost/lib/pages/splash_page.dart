@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
@@ -9,6 +11,8 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   @override
+  int time = 0;
+  late Timer _timer;
   Widget build(BuildContext context) {
     return new Material(
       child: new Scaffold(
@@ -50,7 +54,7 @@ class _SplashPageState extends State<SplashPage> {
               padding: const EdgeInsets.fromLTRB(0.0, 45.0, 10.0, 0.0),
               child: OutlineButton(
                 child: new Text(
-                  "Skip",
+                  "Skip ${3 - time}",
                   textAlign: TextAlign.center,
                   style: new TextStyle(
                     color: Colors.white,
@@ -74,11 +78,24 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void _skip() {
-    Navigator.pushReplacementNamed(context, 'SettingsPage');
+    Navigator.pushReplacementNamed(context, '/Home');
   }
 
   void _countDown() {
-    var _duration = new Duration(seconds: 3);
-    new Future.delayed(_duration, _skip);
+    // var _duration = new Duration(seconds: 3);
+    _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
+      time++;
+      if (time == 3) {
+        _timer.cancel();
+        _skip();
+      }
+      setState(() {});
+    });
+    // new Future.delayed(Duration(seconds: 3), _skip);
+  }
+
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 }
