@@ -20,7 +20,7 @@ class _SignupScreenState extends State<SignupScreen> {
             child: Center(
               child: Padding(
                 padding:
-                const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
@@ -51,26 +51,19 @@ class _SignupScreenState extends State<SignupScreen> {
                     const SizedBox(
                       height: 30,
                     ),
-                    Row(
-                      children: [
-                        SocialLoginButton(
-                          buttonType: SocialLoginButtonType.google,
-                          onPressed: () {},
-                        ),
-                        const SizedBox(width: 37),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const SizedBox(width: 37),
-                        SocialLoginButton(
-                          buttonType: SocialLoginButtonType.google,
-                          onPressed: () {},
-                        ),
-                      ],
+                    SocialLoginButton(
+                      buttonType: SocialLoginButtonType.google,
+                      onPressed: () {},
                     ),
                     const SizedBox(
-                      height: 50,
+                      height: 20,
+                    ),
+                    SocialLoginButton(
+                      buttonType: SocialLoginButtonType.facebook,
+                      onPressed: () {},
+                    ),
+                    const SizedBox(
+                      height: 25,
                     ),
                     customText(
                         txt: "or login with email",
@@ -104,14 +97,25 @@ class _SignupScreenState extends State<SignupScreen> {
                       ],
                     ),
 
-                    const SizedBox(height: 40),
-                    InkWell(
-                      child: SignUpContainer(st: "Sign Up"),
-                      onTap: () {},
+                    const SizedBox(height: 10),
+                    // InkWell(
+                    //   child: SignUpContainer(st: "Sign Up"),
+                    //   focusColor: Colors.green,
+                    //   highlightColor:Colors.green,
+                    //   hoverColor: Colors.orange,
+                    //
+                    //   onTap: () {},
+                    // ),
+
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Text('Sign Up'),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.teal,
+                        onPrimary: Colors.white,
+                      ),
                     ),
-                    const SizedBox(
-                      height: 50,
-                    ),
+
                     InkWell(
                       child: RichText(
                         text: RichTextSpan(
