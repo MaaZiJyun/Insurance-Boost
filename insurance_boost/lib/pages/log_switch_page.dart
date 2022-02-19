@@ -24,4 +24,19 @@ class MainPage extends StatelessWidget {
       ),
     );
   }
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     body: StreamBuilder<User?>(
+  //       stream: FirebaseAuth.instance.authStateChanges(),
+  //       builder: (context, snapshot) {
+  //         if (snapshot.connectionState == ConnectionState) {
+  //           return Center(child: CircularProgressIndicator),
+  //           return IndexPage();
+  //         } else {
+  //           return LoginScreen();
+  //         }
+  //       },
+  //     ),
+  //   );
+  // }
 }
