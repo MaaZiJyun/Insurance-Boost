@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:insurance_boost/pages/auth/login_screen.dart';
 import 'package:insurance_boost/utils/exports.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
+
+import '../../main.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -10,7 +13,11 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   bool _value = false;
+  // bool islogin = true;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -76,13 +83,19 @@ class _SignupScreenState extends State<SignupScreen> {
                       height: 30,
                     ),
                     const SizedBox(height: 20),
-                    // CustomTextField(Lone: "Email", Htwo: "Email"),
-                    // const SizedBox(height: 20),
-                    // CustomTextField(Lone: "Password", Htwo: "Password"),
-                    // const SizedBox(height: 50),
+                    CustomTextField(
+                        controller: emailController,
+                        Lone: "Email",
+                        Htwo: "Email"),
+                    const SizedBox(height: 20),
+                    CustomTextField(
+                        controller: passwordController,
+                        Lone: "Password",
+                        Htwo: "Password"),
+                    const SizedBox(height: 50),
 
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: signUp,
                       child: Text('Sign Up'),
                       style: ElevatedButton.styleFrom(
                         shape: new RoundedRectangleBorder(
@@ -116,5 +129,21 @@ class _SignupScreenState extends State<SignupScreen> {
         ),
       ),
     );
+  }
+
+  Future signUp() async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Center(child: CircularProgressIndicator()),
+    );
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim());
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
+    navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 }
