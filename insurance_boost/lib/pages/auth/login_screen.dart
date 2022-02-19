@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontSize: 14,
                         )),
                     const SizedBox(
-                      height: 15,
+                      height: 60,
                     ),
                     customText(
                         txt: "Enter via social networks",
@@ -83,36 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomTextField(Lone: "Email", Htwo: "Email"),
                     const SizedBox(height: 20),
                     CustomTextField(Lone: "Password", Htwo: "Password"),
-                    const SizedBox(height: 20),
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: _value,
-                          onChanged: (newValue) {
-                            setState(() {
-                              _value = newValue!;
-                            });
-                            const Text(
-                              "Remember me",
-                              style: TextStyle(
-                                  fontSize: 13, color: AppColors.kBlackColor),
-                            );
-                          },
-                        ),
-                        Spacer(),
-                        const TextButton(
-                          onPressed: null,
-                          child: Text(
-                            "Forgot password?",
-                            style: TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 50),
                     ElevatedButton(
                       onPressed: () {},
                       child: Text('Sign Up'),
