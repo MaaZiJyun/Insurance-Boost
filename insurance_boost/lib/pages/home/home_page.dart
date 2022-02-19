@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:insurance_boost/pages/home/FeaturedPlants.dart';
+import 'package:insurance_boost/pages/home/my_submissions.dart';
 import 'package:insurance_boost/pages/home/HeaderWithSearchBox.dart';
-import 'package:insurance_boost/pages/home/RecomendsPlants.dart';
+import 'package:insurance_boost/pages/home/recomends_packages.dart';
 import 'package:insurance_boost/pages/home/TitleWithMoreBtn.dart';
 
 class HomePage extends StatefulWidget {
@@ -121,11 +121,11 @@ class _HomePageState extends State<HomePage> {
             searchItem == ''
                 ? TitleWithMoreBtn(title: "Recomended", press: () {})
                 : SizedBox(height: 0),
-            searchItem == '' ? RecomendsPlants() : Text(searchItem),
+            searchItem == '' ? RecomendsPackages() : Text(searchItem),
             searchItem == ''
                 ? TitleWithMoreBtn(title: "Featured Plants", press: () {})
                 : SizedBox(height: 0),
-            searchItem == '' ? FeaturedPlants() : SizedBox(height: 0),
+            searchItem == '' ? MySubmissions() : SizedBox(height: 0),
             SizedBox(height: 20),
           ],
         ),

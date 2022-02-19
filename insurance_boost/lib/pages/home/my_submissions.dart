@@ -6,8 +6,8 @@ import 'package:insurance_boost/pages/detail_pages/submission_detail_page.dart';
 
 // import '../../../constants.dart';
 
-class FeaturedPlants extends StatelessWidget {
-  const FeaturedPlants({
+class MySubmissions extends StatelessWidget {
+  const MySubmissions({
     Key? key,
   }) : super(key: key);
 
@@ -17,7 +17,7 @@ class FeaturedPlants extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: <Widget>[
-          FeaturePlantCard(
+          MySubmissionsCard(
             image: "image/img2.png",
             press: () {
               Navigator.push(
@@ -28,7 +28,7 @@ class FeaturedPlants extends StatelessWidget {
               );
             },
           ),
-          FeaturePlantCard(
+          MySubmissionsCard(
             image: "image/img2.png",
             press: () {},
           ),
@@ -38,8 +38,8 @@ class FeaturedPlants extends StatelessWidget {
   }
 }
 
-class FeaturePlantCard extends StatelessWidget {
-  const FeaturePlantCard({
+class MySubmissionsCard extends StatelessWidget {
+  const MySubmissionsCard({
     Key? key,
     required this.image,
     required this.press,

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 // import '../../../constants.dart';
 
-class RecomendsPlants extends StatelessWidget {
-  const RecomendsPlants({
+class RecomendsPackages extends StatelessWidget {
+  const RecomendsPackages({
     Key? key,
   }) : super(key: key);
 
@@ -13,7 +13,7 @@ class RecomendsPlants extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: <Widget>[
-          RecomendPlantCard(
+          RecomendsPackagesCard(
             image: "image/img2.png",
             title: "Samantha",
             country: "Russia",
@@ -22,7 +22,7 @@ class RecomendsPlants extends StatelessWidget {
               //switch to detail
             },
           ),
-          RecomendPlantCard(
+          RecomendsPackagesCard(
             image: "image/img2.png",
             title: "Angelica",
             country: "Russia",
@@ -31,7 +31,7 @@ class RecomendsPlants extends StatelessWidget {
               //switch to detail
             },
           ),
-          RecomendPlantCard(
+          RecomendsPackagesCard(
             image: "image/img2.png",
             title: "Samantha",
             country: "Russia",
@@ -44,8 +44,8 @@ class RecomendsPlants extends StatelessWidget {
   }
 }
 
-class RecomendPlantCard extends StatelessWidget {
-  const RecomendPlantCard({
+class RecomendsPackagesCard extends StatelessWidget {
+  const RecomendsPackagesCard({
     Key? key,
     required this.image,
     required this.title,
