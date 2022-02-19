@@ -61,8 +61,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontWeight: FontWeight.normal,
                           fontSize: 14,
                         )),
+                    // const SizedBox(
+                    //   height: 15,
+                    // ),
                     const SizedBox(
-                      height: 15,
+                      height: 60,
                     ),
                     customText(
                         txt: "Enter via social networks",
@@ -82,23 +85,27 @@ class _LoginScreenState extends State<LoginScreen> {
                         provider.googleLogin();
                       },
                     ),
+                    // const SizedBox(
+                    //   height: 10,
+                    // ),
                     const SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
                     SocialLoginButton(
                       buttonType: SocialLoginButtonType.facebook,
                       onPressed: () async {
-                        final result = await FacebookAuth.i.login();
+                        final result = await FacebookAuth.i
+                            .login(permissions: ["public_profile", "email"]);
 
-                        // if (result.status == LoginStatus.success) {
-                        //   final userData = await FacebookAuth.i.getUserData(
-                        //     fields: "email,name",
-                        //   );
+                        if (result.status == LoginStatus.success) {
+                          final userData = await FacebookAuth.i.getUserData(
+                            fields: "email,name",
+                          );
 
-                        //   // setState(() {
-                        //   //   _userData = userData;
-                        //   // });
-                        // }
+                          // setState(() {
+                          //   _userData = userData;
+                          // });
+                        }
                       },
                     ),
 
@@ -125,33 +132,33 @@ class _LoginScreenState extends State<LoginScreen> {
                         Lone: "Password",
                         Htwo: "Password"),
                     const SizedBox(height: 20),
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: _value,
-                          onChanged: (newValue) {
-                            setState(() {
-                              _value = newValue!;
-                            });
-                            const Text(
-                              "Remember me",
-                              style: TextStyle(
-                                  fontSize: 13, color: AppColors.kBlackColor),
-                            );
-                          },
-                        ),
-                        Spacer(),
-                        const TextButton(
-                          onPressed: null,
-                          child: Text(
-                            "Forgot password?",
-                            style: TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   children: [
+                    //     Checkbox(
+                    //       value: _value,
+                    //       onChanged: (newValue) {
+                    //         setState(() {
+                    //           _value = newValue!;
+                    //         });
+                    //         const Text(
+                    //           "Remember me",
+                    //           style: TextStyle(
+                    //               fontSize: 13, color: AppColors.kBlackColor),
+                    //         );
+                    //       },
+                    //     ),
+                    //     // Spacer(),
+                    //     // const TextButton(
+                    //     //   onPressed: null,
+                    //     //   child: Text(
+                    //     //     "Forgot password?",
+                    //     //     style: TextStyle(
+                    //     //       fontSize: 15,
+                    //     //     ),
+                    //     //   ),
+                    //     // ),
+                    //   ],
+                    // ),
 
                     const SizedBox(height: 40),
                     ElevatedButton(
