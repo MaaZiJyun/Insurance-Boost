@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
 
 class PackageDetailPage extends StatefulWidget {
-  const PackageDetailPage({Key? key}) : super(key: key);
+  final String id;
+  final String detail;
+  final int price;
+  final String category;
+  final int point;
+  final String code;
+
+  const PackageDetailPage({
+    Key? key,
+    required this.id,
+    required this.detail,
+    required this.price,
+    required this.category,
+    required this.point,
+    required this.code,
+  }) : super(key: key);
 
   @override
   _PackageDetailPageState createState() => _PackageDetailPageState();
@@ -37,30 +52,28 @@ class _PackageDetailPageState extends State<PackageDetailPage> {
                 Row(
                   children: [
                     Text(
-                      'name',
+                      widget.code,
                       style: TextStyle(
-                        fontSize: 30,
+                        fontSize: 40,
                       ),
                     ),
                     SizedBox(
                       width: 10,
                     ),
-                    StatusTag(color: Colors.green, text: 'category'),
+                    StatusTag(text: widget.category),
                   ],
                 ),
                 Text(
-                  'CNY 20 / Year',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  "￥ ${widget.price}  / Year",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
-                  'detail',
+                  widget.detail,
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 15,
                   ),
                 ),
                 SizedBox(
@@ -82,13 +95,20 @@ class _PackageDetailPageState extends State<PackageDetailPage> {
 }
 
 class StatusTag extends StatelessWidget {
-  final Color color;
+  late Color color;
   final String text;
-  const StatusTag({Key? key, required this.color, required this.text})
-      : super(key: key);
+  StatusTag({Key? key, required this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    if (text == 'Life') {
+      color = Colors.red;
+    } else if (text == 'Health') {
+      color = Colors.green;
+    } else {
+      color = Colors.orange;
+    }
+
     return Container(
       padding: const EdgeInsets.only(
         left: 10,

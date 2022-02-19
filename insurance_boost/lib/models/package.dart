@@ -1,9 +1,11 @@
 class Package {
-  final String Id;
-  final String detial;
+  final String id;
+  final String detail;
   final double price;
-  final String categories;
+  final String category;
   final int point;
+  final String code;
 
-  Package(this.Id, this.detial, this.price, this.categories, this.point);
+  Package(
+      this.id, this.detail, this.price, this.category, this.point, this.code);
 }

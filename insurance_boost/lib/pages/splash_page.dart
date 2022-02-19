@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
@@ -78,7 +79,11 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void _skip() {
-    Navigator.pushReplacementNamed(context, '/WelcomeScreen');
+    if (FirebaseAuth.instance.currentUser != null) {
+      Navigator.pushReplacementNamed(context, '/MainPage');
+    } else {
+      Navigator.pushReplacementNamed(context, '/WelcomeScreen');
+    }
   }
 
   void _countDown() {

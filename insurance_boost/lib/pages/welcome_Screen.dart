@@ -40,7 +40,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       fontSize: 14,
                     )),
                 const SizedBox(height: 50),
-
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -57,14 +56,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                   ),
                 ),
-                // Padding(
-                //   padding:
-                //       const EdgeInsets.symmetric(vertical: 0, horizontal: 15),
-                //   child: InkWell(
-                //     child: SignUpContainer(st: "Let's Go"),
-                //     onTap: () {},
-                //   ),
-                // ),
               ],
             ),
           ),
