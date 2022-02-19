@@ -1,4 +1,5 @@
 // import 'dart:html';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -24,6 +25,16 @@ class GoogleSignInProvider extends ChangeNotifier {
 
     await FirebaseAuth.instance.signInWithCredential(credential);
     notifyListeners();
-    await UserApi(FirebaseAuth.instance.currentUser!.uid).addUserToStore();
+    bool n = true;
+    await FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((value) {
+      n = false;
+    });
+    if (n) {
+      await UserApi(FirebaseAuth.instance.currentUser!.uid).addUserToStore();
+    }
   }
 }
