@@ -43,7 +43,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
                         builder: (context) => const MainPage()));
                   },
                   child: Text("Let's Go"),
