@@ -1,4 +1,5 @@
 import 'package:insurance_boost/pages/auth/login_screen.dart';
+import 'package:insurance_boost/pages/log_switch_page.dart';
 import 'package:insurance_boost/utils/exports.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -43,7 +44,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const LoginScreen()));
+                        builder: (context) => const MainPage()));
                   },
                   child: Text("Let's Go"),
                   style: ElevatedButton.styleFrom(

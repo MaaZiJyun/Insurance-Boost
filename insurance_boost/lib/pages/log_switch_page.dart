@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:insurance_boost/pages/auth/login_screen.dart';
 import 'package:insurance_boost/pages/index_page.dart';
 import 'package:insurance_boost/pages/welcome_Screen.dart';
 
@@ -15,7 +16,7 @@ class MainPage extends StatelessWidget {
           if (snapshot.hasData) {
             return IndexPage();
           } else {
-            return WelcomeScreen();
+            return LoginScreen();
           }
         },
       ),
