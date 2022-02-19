@@ -4,6 +4,8 @@ import 'package:insurance_boost/pages/auth/login_screen.dart';
 import 'package:insurance_boost/pages/index_page.dart';
 import 'package:insurance_boost/pages/welcome_Screen.dart';
 
+import 'auth/signup_sreen.dart';
+
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
 
