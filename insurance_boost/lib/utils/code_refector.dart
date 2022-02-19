@@ -73,7 +73,7 @@ Widget CustomTextField({required String Lone, required String Htwo}) {
           color: AppColors.kDarkblack,
           style: BorderStyle.solid,
         ))),
-    autofocus: true,
+    autofocus: false,
     keyboardType: TextInputType.multiline,
   );
 }
