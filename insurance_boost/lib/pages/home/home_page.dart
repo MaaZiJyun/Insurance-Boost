@@ -3,6 +3,8 @@ import 'package:insurance_boost/pages/home/my_submissions.dart';
 import 'package:insurance_boost/pages/home/HeaderWithSearchBox.dart';
 import 'package:insurance_boost/pages/home/recomends_packages.dart';
 import 'package:insurance_boost/pages/home/TitleWithMoreBtn.dart';
+import 'package:insurance_boost/pages/list/package_list.dart';
+import 'package:insurance_boost/pages/list/submission_list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,6 +20,24 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+  }
+
+  void gotoSubmissionList() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SubmissionList(),
+      ),
+    );
+  }
+
+  void gotoPackageList() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PackageList(),
+      ),
+    );
   }
 
   @override
@@ -119,11 +139,13 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             searchItem == ''
-                ? TitleWithMoreBtn(title: "Recomended", press: () {})
+                ? TitleWithMoreBtn(
+                    title: "Recomended", press: () => gotoPackageList)
                 : SizedBox(height: 0),
             searchItem == '' ? RecomendsPackages() : Text(searchItem),
             searchItem == ''
-                ? TitleWithMoreBtn(title: "Featured Plants", press: () {})
+                ? TitleWithMoreBtn(
+                    title: "My Submission", press: () => gotoSubmissionList)
                 : SizedBox(height: 0),
             searchItem == '' ? MySubmissions() : SizedBox(height: 0),
             SizedBox(height: 20),

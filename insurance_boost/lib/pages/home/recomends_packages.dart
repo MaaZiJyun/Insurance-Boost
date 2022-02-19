@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:insurance_boost/pages/detail_pages/package_detail_page.dart';
 
 // import '../../../constants.dart';
 
@@ -19,7 +20,12 @@ class RecomendsPackages extends StatelessWidget {
             country: "Russia",
             price: 440,
             press: () {
-              //switch to detail
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PackageDetailPage(),
+                ),
+              );
             },
           ),
           RecomendsPackagesCard(
@@ -72,7 +78,7 @@ class RecomendsPackagesCard extends StatelessWidget {
         children: <Widget>[
           Image.asset(image),
           GestureDetector(
-            onTap: press(),
+            onTap: () => press(),
             child: Container(
               padding: EdgeInsets.all(20 / 2),
               decoration: BoxDecoration(

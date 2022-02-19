@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class New extends StatefulWidget {
-  const New({Key? key}) : super(key: key);
+class SubmissionList extends StatefulWidget {
+  const SubmissionList({Key? key}) : super(key: key);
 
   @override
-  _NewState createState() => _NewState();
+  _SubmissionListState createState() => _SubmissionListState();
 }
 
-class _NewState extends State<New> {
+class _SubmissionListState extends State<SubmissionList> {
   // This holds a list of fiction users
   // You can use data fetched from a database or a server as well
   final List<Map<String, dynamic>> _allUsers = [
@@ -56,19 +56,28 @@ class _NewState extends State<New> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Kindacode.com'),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 1,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.grey[800],
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [
-            const SizedBox(
-              height: 20,
-            ),
             TextField(
               onChanged: (value) => _runFilter(value),
               decoration: const InputDecoration(
-                  labelText: 'Search', suffixIcon: Icon(Icons.search)),
+                labelText: 'Search',
+                suffixIcon: Icon(Icons.search),
+              ),
             ),
             const SizedBox(
               height: 20,
@@ -79,13 +88,14 @@ class _NewState extends State<New> {
                       itemCount: _foundUsers.length,
                       itemBuilder: (context, index) => Card(
                         key: ValueKey(_foundUsers[index]["id"]),
-                        color: Colors.amberAccent,
-                        elevation: 4,
+                        color: Colors.white,
+                        elevation: 2,
                         margin: const EdgeInsets.symmetric(vertical: 10),
                         child: ListTile(
-                          leading: Text(
-                            _foundUsers[index]["id"].toString(),
-                            style: const TextStyle(fontSize: 24),
+                          leading: Icon(
+                            Icons.picture_as_pdf,
+                            color: Colors.red[700],
+                            size: 40,
                           ),
                           title: Text(_foundUsers[index]['name']),
                           subtitle: Text(
