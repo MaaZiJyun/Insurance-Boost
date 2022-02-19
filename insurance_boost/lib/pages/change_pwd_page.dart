@@ -117,7 +117,7 @@ class _ChangePwdPageState extends State<ChangePwdPage> {
                   ),
                 ),
                 SizedBox(
-                  height: height * 0.02,
+                  height: 10,
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(

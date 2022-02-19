@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:insurance_boost/pages/home/home_page.dart';
 import 'package:insurance_boost/pages/reward_page.dart';
+import 'package:insurance_boost/pages/submit_form_page.dart';
 
 class IndexPage extends StatefulWidget {
   const IndexPage({Key? key}) : super(key: key);
@@ -78,7 +79,14 @@ class _IndexPageState extends State<IndexPage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: currentIndex == 0 ? Colors.teal : Colors.grey,
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SubmitFormPage(),
+            ),
+          );
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       drawer: Drawer(

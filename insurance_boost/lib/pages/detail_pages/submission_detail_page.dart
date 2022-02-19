@@ -66,30 +66,26 @@ class _SubmissionDetailPageState extends State<SubmissionDetailPage> {
               SizedBox(
                 height: 10,
               ),
-              Row(
-                children: [
-                  Text(
-                    'Uploaded by: USERNAME',
-                    style: TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    'Date: 2020.12.13',
-                    style: TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                ],
+              Text(
+                'Uploaded by: USERNAME',
+                style: TextStyle(
+                  fontSize: 15,
+                ),
               ),
               SizedBox(
-                height: 10,
+                height: 5,
               ),
               Text(
-                'ID: 12001u293120',
+                'Date: 2020.12.13',
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                'Email: 12001u@maks.com',
                 style: TextStyle(
                   fontSize: 15,
                 ),
