@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:insurance_boost/main.dart';
 import 'package:insurance_boost/pages/auth/signup_sreen.dart';
 import 'package:insurance_boost/pages/welcome_Screen.dart';
 import 'package:insurance_boost/provider/google_sign_in.dart';
@@ -8,9 +9,6 @@ import 'package:insurance_boost/utils/appColors.dart';
 import 'package:insurance_boost/utils/code_refector.dart';
 import 'package:provider/provider.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
-
-import '../../main.dart';
-import '../log_switch_page.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
