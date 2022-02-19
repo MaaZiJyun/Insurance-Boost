@@ -19,6 +19,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  String userEmail = "";
   // Map? _userData;
 
   final emailController = TextEditingController();
@@ -213,4 +214,21 @@ class _LoginScreenState extends State<LoginScreen> {
     }
     navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
+
+// Future<UserCredential> signInWithFacebook() async {
+//   // Trigger the sign-in flow
+//   final LoginResult loginResult = await FacebookAuth.instance.login(
+//     permissions: ['email', 'public_profile', 'user_birthday']
+//   );
+
+//   // Create a credential from the access token
+//   final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+//   final userData = await FacebookAuth.instance.getUserData();
+
+//   userEmail = userData['email'];
+
+//   // Once signed in, return the UserCredential
+//   return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+// }
 }
