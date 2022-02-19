@@ -79,34 +79,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     CustomTextField(Lone: "Email", Htwo: "Email"),
                     const SizedBox(height: 20),
                     CustomTextField(Lone: "Password", Htwo: "Password"),
-                    const SizedBox(height: 20),
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: _value,
-                          onChanged: (newValue) {
-                            setState(() {
-                              _value = newValue!;
-                            });
-                            const Text(
-                              "Remember me",
-                              style: TextStyle(
-                                  fontSize: 13, color: AppColors.kBlackColor),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-
-                    const SizedBox(height: 10),
-                    // InkWell(
-                    //   child: SignUpContainer(st: "Sign Up"),
-                    //   focusColor: Colors.green,
-                    //   highlightColor:Colors.green,
-                    //   hoverColor: Colors.orange,
-                    //
-                    //   onTap: () {},
-                    // ),
+                    const SizedBox(height: 50),
 
                     ElevatedButton(
                       onPressed: () {},
@@ -121,14 +94,16 @@ class _SignupScreenState extends State<SignupScreen> {
                             EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                       ),
                     ),
-
+                    SizedBox(
+                      height: 20,
+                    ),
                     InkWell(
                       child: RichText(
                         text: RichTextSpan(
                             one: "Already have an account ? ", two: "Login"),
                       ),
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) => const LoginScreen()));
                       },
                     ),

@@ -1,3 +1,4 @@
+import 'package:insurance_boost/pages/auth/login_screen.dart';
 import 'package:insurance_boost/utils/exports.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -10,19 +11,23 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
+    var h = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
+        body: Center(
           child: Padding(
-            padding: const EdgeInsets.only(top: 0),
+            padding: const EdgeInsets.all(20),
             child: Column(
               children: [
+                SizedBox(
+                  height: h / 6,
+                ),
                 const Image(image: AssetImage("image/img2.png")),
-                const SizedBox(height: 48),
+                const SizedBox(height: 8),
                 customText(
                     txt: "Welcome",
                     style: const TextStyle(
-                      fontSize: 26,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                     )),
                 const SizedBox(height: 8),
@@ -33,19 +38,22 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       fontWeight: FontWeight.normal,
                       fontSize: 14,
                     )),
-                const SizedBox(height: 60),
+                const SizedBox(height: 50),
 
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const LoginScreen()));
+                  },
                   child: Text("Let's Go"),
                   style: ElevatedButton.styleFrom(
                     shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(40.0),
+                      borderRadius: new BorderRadius.circular(30.0),
                     ),
                     primary: Colors.teal,
                     onPrimary: Colors.white,
                     padding:
-                        EdgeInsets.symmetric(horizontal: 140, vertical: 15),
+                        EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                   ),
                 ),
                 // Padding(

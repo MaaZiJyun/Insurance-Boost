@@ -77,7 +77,7 @@ Widget CustomTextField(
           color: AppColors.kDarkblack,
           style: BorderStyle.solid,
         ))),
-    autofocus: true,
+    autofocus: false,
     keyboardType: TextInputType.multiline,
   );
 }
