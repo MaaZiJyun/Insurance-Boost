@@ -100,36 +100,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         controller: passwordController,
                         Lone: "Password",
                         Htwo: "Password"),
-                    const SizedBox(height: 20),
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: _value,
-                          onChanged: (newValue) {
-                            setState(() {
-                              _value = newValue!;
-                            });
-                            const Text(
-                              "Remember me",
-                              style: TextStyle(
-                                  fontSize: 13, color: AppColors.kBlackColor),
-                            );
-                          },
-                        ),
-                        Spacer(),
-                        const TextButton(
-                          onPressed: null,
-                          child: Text(
-                            "Forgot password?",
-                            style: TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
 
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 50),
                     ElevatedButton(
                       onPressed: login,
                       child: Text('Log in'),
@@ -168,8 +140,24 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future login() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim());
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('logging in. . .'),
+        duration: Duration(seconds: 1),
+      ),
+    );
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim());
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Login error, please try again'),
+          backgroundColor: Colors.red,
+          duration: Duration(seconds: 1),
+        ),
+      );
+    }
   }
 }
