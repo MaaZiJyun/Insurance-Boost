@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:insurance_boost/api/user_api.dart';
 import 'package:insurance_boost/main.dart';
 import 'package:insurance_boost/pages/auth/login_screen.dart';
 import 'package:insurance_boost/provider/google_sign_in.dart';
@@ -150,6 +151,7 @@ class _SignupScreenState extends State<SignupScreen> {
     } on FirebaseAuthException catch (e) {
       print(e);
     }
+    await UserApi(FirebaseAuth.instance.currentUser!.uid).addUserToStore();
     navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 }

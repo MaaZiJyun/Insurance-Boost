@@ -1,4 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:insurance_boost/models/user.dart';
 import 'package:insurance_boost/pages/home/my_submissions.dart';
 import 'package:insurance_boost/pages/home/HeaderWithSearchBox.dart';
 import 'package:insurance_boost/pages/home/recomends_packages.dart';
@@ -7,8 +11,6 @@ import 'package:insurance_boost/pages/list/package_list.dart';
 import 'package:insurance_boost/pages/list/submission_list.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -19,6 +21,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     // TODO: implement initState
+
     super.initState();
   }
 
