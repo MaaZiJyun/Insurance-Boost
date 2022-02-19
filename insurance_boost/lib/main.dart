@@ -13,6 +13,8 @@ import 'package:insurance_boost/pages/reward_page.dart';
 import 'package:insurance_boost/pages/settings_page.dart';
 import 'package:insurance_boost/pages/splash_page.dart';
 import 'package:insurance_boost/pages/welcome_Screen.dart';
+import 'package:insurance_boost/provider/google_sign_in.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,34 +30,36 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      navigatorKey: navigatorKey,
-      title: 'Flutter Demo',
-      // themeMode: ThemeMode.dark,
-      debugShowCheckedModeBanner: false,
-      onGenerateTitle: (context) {
-        return AppLocalizations.of(context)!.appTitle;
-      },
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => SplashPage(),
-        '/MainPage': (context) => MainPage(),
-        '/WelcomeScreen': (context) => WelcomeScreen(),
-        '/LoginScreen': (context) => LoginScreen(),
-        '/SignupScreen': (context) => SignupScreen(),
-        '/Home': (context) => IndexPage(),
-        '/SettingsPage': (context) => SettingsPage(),
-        '/EditProfilePage': (context) => EditProfilePage(),
-        '/ChangePwdPage': (context) => ChangePwdPage(),
-        '/RewardPage': (context) => DashBoardPage(),
-        '/AboutPage': (context) => AboutPage(),
-      },
-    );
+    return ChangeNotifierProvider(
+        create: (context) => GoogleSignInProvider(),
+        child: MaterialApp(
+          navigatorKey: navigatorKey,
+          title: 'Flutter Demo',
+          // themeMode: ThemeMode.dark,
+          debugShowCheckedModeBanner: false,
+          onGenerateTitle: (context) {
+            return AppLocalizations.of(context)!.appTitle;
+          },
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+          initialRoute: '/',
+          routes: {
+            '/': (context) => SplashPage(),
+            '/MainPage': (context) => MainPage(),
+            '/WelcomeScreen': (context) => WelcomeScreen(),
+            '/LoginScreen': (context) => LoginScreen(),
+            '/SignupScreen': (context) => SignupScreen(),
+            '/Home': (context) => IndexPage(),
+            '/SettingsPage': (context) => SettingsPage(),
+            '/EditProfilePage': (context) => EditProfilePage(),
+            '/ChangePwdPage': (context) => ChangePwdPage(),
+            '/RewardPage': (context) => DashBoardPage(),
+            '/AboutPage': (context) => AboutPage(),
+          },
+        ));
   }
 }
