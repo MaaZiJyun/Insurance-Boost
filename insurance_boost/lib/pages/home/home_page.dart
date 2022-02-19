@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       children: <Widget>[
                         Text(
-                          'Good morning, User',
+                          'Welcome to W&M',
                           style: Theme.of(context)
                               .textTheme
                               .headline5
