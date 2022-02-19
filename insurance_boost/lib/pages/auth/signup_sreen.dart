@@ -103,7 +103,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             one: "Already have an account ? ", two: "Login"),
                       ),
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) => const LoginScreen()));
                       },
                     ),

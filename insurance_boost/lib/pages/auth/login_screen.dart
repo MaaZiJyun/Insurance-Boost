@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:insurance_boost/pages/auth/signup_sreen.dart';
-import 'package:insurance_boost/pages/welcome_Screen.dart';
-import 'package:insurance_boost/utils/appColors.dart';
 import 'package:insurance_boost/utils/code_refector.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
 
@@ -106,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             one: "Don’t have an account ? ", two: "Sign Up"),
                       ),
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) => const SignupScreen()));
                       },
                     ),
