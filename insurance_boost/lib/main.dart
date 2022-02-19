@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:insurance_boost/pages/about_page.dart';
 import 'package:insurance_boost/pages/auth/login_screen.dart';
 import 'package:insurance_boost/pages/auth/signup_sreen.dart';
@@ -37,11 +37,11 @@ class MyApp extends StatelessWidget {
           title: 'Flutter Demo',
           // themeMode: ThemeMode.dark,
           debugShowCheckedModeBanner: false,
-          onGenerateTitle: (context) {
-            return AppLocalizations.of(context)!.appTitle;
-          },
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
+          // onGenerateTitle: (context) {
+          //   return AppLocalizations.of(context)!.appTitle;
+          // },
+          // localizationsDelegates: AppLocalizations.localizationsDelegates,
+          // supportedLocales: AppLocalizations.supportedLocales,
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
