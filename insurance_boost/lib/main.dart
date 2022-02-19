@@ -8,7 +8,6 @@ import 'package:insurance_boost/pages/detail_pages/pdf_detail_page.dart';
 import 'package:insurance_boost/pages/edit_profile_page.dart';
 import 'package:insurance_boost/global/global_variables.dart' as globals;
 import 'package:insurance_boost/pages/home/home_page.dart';
-import 'package:insurance_boost/pages/home_welcome.dart';
 import 'package:insurance_boost/pages/index_page.dart';
 import 'package:insurance_boost/pages/reward_page.dart';
 import 'package:insurance_boost/pages/settings_page.dart';
