@@ -7,19 +7,16 @@ import 'package:insurance_boost/pages/auth/signup_sreen.dart';
 import 'package:insurance_boost/pages/change_pwd_page.dart';
 import 'package:insurance_boost/pages/edit_profile_page.dart';
 import 'package:insurance_boost/global/global_variables.dart' as globals;
-import 'package:insurance_boost/pages/home/home_page.dart';
 import 'package:insurance_boost/pages/index_page.dart';
-import 'package:insurance_boost/pages/list/submission_list.dart';
-import 'package:insurance_boost/pages/list/package_list.dart';
 import 'package:insurance_boost/pages/log_switch_page.dart';
 import 'package:insurance_boost/pages/reward_page.dart';
 import 'package:insurance_boost/pages/settings_page.dart';
 import 'package:insurance_boost/pages/splash_page.dart';
 import 'package:insurance_boost/pages/welcome_Screen.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 

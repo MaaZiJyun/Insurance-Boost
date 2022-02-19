@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:insurance_boost/global/global_variables.dart' as globals;
 import 'package:insurance_boost/models/account_option_row.dart';
-import 'package:insurance_boost/models/change_password_option.dart';
 import 'package:insurance_boost/models/change_pwd_row.dart';
 import 'package:insurance_boost/models/notification_option_row.dart';
-import 'package:insurance_boost/pages/edit_profile_page.dart';
+import 'package:insurance_boost/utils/exports.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -28,18 +27,6 @@ class _SettingsPageState extends State<SettingsPage> {
             color: Colors.grey[800],
           ),
         ),
-        // actions: [
-        //   IconButton(
-        //     icon: Icon(
-        //       Icons.settings,
-        //       color: Colors.grey[800],
-        //     ),
-        //     onPressed: () {
-        //       Navigator.of(context).push(MaterialPageRoute(
-        //           builder: (BuildContext context) => EditProfilePage()));
-        //     },
-        //   ),
-        // ],
       ),
       body: Container(
         padding: EdgeInsets.only(left: 16, top: 25, right: 16),
@@ -123,7 +110,12 @@ class _SettingsPageState extends State<SettingsPage> {
                 padding: EdgeInsets.fromLTRB(60, 10, 60, 10),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
-                onPressed: () {},
+                onPressed: () async {
+                  await FirebaseAuth.instance.signOut();
+                  // user sign out
+                  Navigator.pop(context);
+                  Navigator.pushReplacementNamed(context, '/MainPage');
+                },
                 child: Text("SIGN OUT",
                     style: TextStyle(
                         fontSize: 16, letterSpacing: 2.2, color: Colors.white)),
@@ -134,41 +126,6 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
     );
   }
-
-  // GestureDetector buildNotificationOptionRow(String title, bool _isActive) {
-  //   return GestureDetector(
-  //     child: Row(
-  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //       children: [
-  //         Text(
-  //           title,
-  //           style: TextStyle(
-  //               fontSize: 18,
-  //               fontWeight: FontWeight.w500,
-  //               color: Colors.grey[600]),
-  //         ),
-  //         Transform.scale(
-  //           scale: 0.7,
-  //           child: CupertinoSwitch(
-  //             activeColor: Colors.lightGreen[300],
-  //             value: _isActive,
-  //             onChanged: (bool value) => setState(() {
-  //               _isActive = value;
-  //               // print(_isActive);
-  //               // print(globals.NIGHT_MODE);
-  //             }),
-  //           ),
-  //         )
-  //       ],
-  //     ),
-  //     // onTap: () {
-  //     //   setState(() {
-  //     //     isActive = !isActive;
-  //     //     print(isActive);
-  //     //   });
-  //     // },
-  //   );
-  // }
 
   GestureDetector buildAccountOptionRow(BuildContext context, String title) {
     return GestureDetector(
