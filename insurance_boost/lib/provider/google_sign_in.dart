@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:insurance_boost/api/user_api.dart';
 import 'package:insurance_boost/utils/exports.dart';
 
 class GoogleSignInProvider extends ChangeNotifier {
@@ -23,5 +24,6 @@ class GoogleSignInProvider extends ChangeNotifier {
 
     await FirebaseAuth.instance.signInWithCredential(credential);
     notifyListeners();
+    await UserApi(FirebaseAuth.instance.currentUser!.uid).addUserToStore();
   }
 }

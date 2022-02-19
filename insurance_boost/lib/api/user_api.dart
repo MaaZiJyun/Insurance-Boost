@@ -30,7 +30,7 @@ class UserApi {
     String username = 'Username';
     String email = 'email@email.com';
     String profileUrl =
-        'gs://insurance-boost-26d35.appspot.com/default/profile_default.png';
+        'https://firebasestorage.googleapis.com/v0/b/insurance-boost-26d35.appspot.com/o/default%2Fprofile_default.png?alt=media&token=b7ba805b-67e5-4951-b500-c08f8745dd30';
     String bio = 'Say something?';
     return userCollection.doc(uid).set({
       'username': username,
