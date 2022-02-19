@@ -1,47 +1,4 @@
-// class new extends StatefulWidget {
-//   @override
-//   _newState createState() => _newState();
-// }
-
-// class new extends StatelessWidget{
-//   Widget build (BuildContext context){
-//     return Scaffold(
-//     AppBar:AppBar(title: Text('abc'),
-//     centerTitle: ture,
-//     backgroundColor: Color.red[600],
-//     ),
-//     Body:Container(
-
-//     ),
-//     FloatingActionButton:FloatingActionButton(
-//       onPressed: (){},
-//       child: Text('awe'),
-//       backgroundColor: Color.red[600],
-//     ),
-//   );
-//   }
-
-// }
-
 import 'package:flutter/material.dart';
-
-// void main() {
-//   runApp(const MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const MaterialApp(
-//       // Remove the debug banner
-//       debugShowCheckedModeBanner: false,
-//       title: 'Kindacode.com',
-//       home: HomePage(),
-//     );
-//   }
-// }
 
 class New extends StatefulWidget {
   const New({Key? key}) : super(key: key);
