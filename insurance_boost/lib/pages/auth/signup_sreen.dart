@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:insurance_boost/pages/auth/login_screen.dart';
 import 'package:insurance_boost/utils/exports.dart';
+import 'package:provider/provider.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
 
 import '../../main.dart';
+import '../../provider/google_sign_in.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -61,7 +63,12 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                     SocialLoginButton(
                       buttonType: SocialLoginButtonType.google,
-                      onPressed: () {},
+                      onPressed: () {
+                        final provider = Provider.of<GoogleSignInProvider>(
+                            context,
+                            listen: false);
+                        provider.googleLogin();
+                      },
                     ),
                     const SizedBox(
                       height: 20,
