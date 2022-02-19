@@ -20,11 +20,11 @@ class _PackageListPageState extends State<PackageListPage> {
     List<Widget> listItems = [];
     responseList.forEach((post) {
       listItems.add(Container(
-          // height: 150,
+          height: 150,
           margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              color: Colors.white,
+              color: Colors.teal,
               boxShadow: [
                 BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
               ]),
@@ -57,10 +57,10 @@ class _PackageListPageState extends State<PackageListPage> {
                     )
                   ],
                 ),
-                Image.asset(
-                  "assets/images/${post["image"]}",
-                  height: double.infinity,
-                )
+                // Image.asset(
+                //   "assets/images/${post["image"]}",
+                //   height: double.infinity,
+                // )
               ],
             ),
           )));
@@ -123,7 +123,7 @@ class _PackageListPageState extends State<PackageListPage> {
         //   // ],
         // ),
         body: Container(
-          height: size.height,
+          // height: size.height,
           child: Column(
             children: <Widget>[
               // Row(
