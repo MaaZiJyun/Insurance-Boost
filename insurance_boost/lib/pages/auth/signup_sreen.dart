@@ -76,10 +76,10 @@ class _SignupScreenState extends State<SignupScreen> {
                       height: 30,
                     ),
                     const SizedBox(height: 20),
-                    CustomTextField(Lone: "Email", Htwo: "Email"),
-                    const SizedBox(height: 20),
-                    CustomTextField(Lone: "Password", Htwo: "Password"),
-                    const SizedBox(height: 50),
+                    // CustomTextField(Lone: "Email", Htwo: "Email"),
+                    // const SizedBox(height: 20),
+                    // CustomTextField(Lone: "Password", Htwo: "Password"),
+                    // const SizedBox(height: 50),
 
                     ElevatedButton(
                       onPressed: () {},
