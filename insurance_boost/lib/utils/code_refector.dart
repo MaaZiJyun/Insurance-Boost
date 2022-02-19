@@ -58,8 +58,12 @@ TextSpan RichTextSpan({required String one, required String two}) {
 }
 
 // TextField
-Widget CustomTextField({required String Lone, required String Htwo}) {
+Widget CustomTextField(
+    {required String Lone,
+    required String Htwo,
+    required TextEditingController controller}) {
   return TextField(
+    controller: controller,
     decoration: InputDecoration(
         labelText: Lone,
         hintText: Htwo,

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:insurance_boost/pages/auth/signup_sreen.dart';
 import 'package:insurance_boost/pages/welcome_Screen.dart';
@@ -13,6 +14,16 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+
+    super.dispose();
+  }
+
   bool _value = false;
   @override
   Widget build(BuildContext context) {
@@ -80,9 +91,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 30,
                     ),
                     const SizedBox(height: 20),
-                    CustomTextField(Lone: "Email", Htwo: "Email"),
+                    CustomTextField(
+                        controller: emailController,
+                        Lone: "Email",
+                        Htwo: "Email"),
                     const SizedBox(height: 20),
-                    CustomTextField(Lone: "Password", Htwo: "Password"),
+                    CustomTextField(
+                        controller: passwordController,
+                        Lone: "Password",
+                        Htwo: "Password"),
                     const SizedBox(height: 20),
                     Row(
                       children: [
@@ -114,8 +131,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     const SizedBox(height: 40),
                     ElevatedButton(
-                      onPressed: () {},
-                      child: Text('Sign Up'),
+                      onPressed: login,
+                      child: Text('Log in'),
                       style: ElevatedButton.styleFrom(
                         shape: new RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(40.0),
@@ -148,5 +165,11 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  Future login() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim());
   }
 }
