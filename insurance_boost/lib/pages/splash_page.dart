@@ -78,7 +78,7 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void _skip() {
-    Navigator.pushReplacementNamed(context, '/Home');
+    Navigator.pushReplacementNamed(context, '/MainPage');
   }
 
   void _countDown() {

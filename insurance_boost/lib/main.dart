@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:insurance_boost/pages/about_page.dart';
@@ -10,12 +11,15 @@ import 'package:insurance_boost/pages/home/home_page.dart';
 import 'package:insurance_boost/pages/index_page.dart';
 import 'package:insurance_boost/pages/list/submission_list.dart';
 import 'package:insurance_boost/pages/list/package_list.dart';
+import 'package:insurance_boost/pages/log_switch_page.dart';
 import 'package:insurance_boost/pages/reward_page.dart';
 import 'package:insurance_boost/pages/settings_page.dart';
 import 'package:insurance_boost/pages/splash_page.dart';
 import 'package:insurance_boost/pages/welcome_Screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -41,6 +45,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => SplashPage(),
+        '/MainPage': (context) => MainPage(),
         '/WelcomeScreen': (context) => WelcomeScreen(),
         '/LoginScreen': (context) => LoginScreen(),
         '/SignupScreen': (context) => SignupScreen(),
