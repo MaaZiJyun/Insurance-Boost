@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:insurance_boost/pages/detail_pages/pdf_detail_page.dart';
 import 'package:insurance_boost/pages/detail_pages/submission_detail_page.dart';

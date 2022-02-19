@@ -1,7 +1,11 @@
-// import 'dart:io';
-
+import 'dart:io';
+import 'dart:typed_data';
+import 'package:path/path.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:insurance_boost/api/submission_api.dart';
 
 class SubmitFormPage extends StatefulWidget {
   const SubmitFormPage({Key? key}) : super(key: key);
@@ -11,14 +15,15 @@ class SubmitFormPage extends StatefulWidget {
 }
 
 class _SubmitFormPageState extends State<SubmitFormPage> {
-  late String _name;
-  late String _email;
-  late String _detail;
+  late String title;
+  late String email;
+  late String detail;
   late String currentDate;
   late String author;
   late DateTime date;
   late IconData icon;
   late FilePickerResult result;
+  UploadTask? task;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -26,7 +31,7 @@ class _SubmitFormPageState extends State<SubmitFormPage> {
   void initState() {
     date = DateTime.now();
     currentDate = date.toString();
-    author = 'Domuki';
+    author = FirebaseAuth.instance.currentUser!.uid;
     icon = Icons.upload;
   }
 
@@ -42,7 +47,7 @@ class _SubmitFormPageState extends State<SubmitFormPage> {
         return null;
       },
       onSaved: (value) {
-        _name = value!;
+        title = value!;
       },
     );
   }
@@ -64,7 +69,7 @@ class _SubmitFormPageState extends State<SubmitFormPage> {
         return null;
       },
       onSaved: (value) {
-        _email = value!;
+        email = value!;
       },
     );
   }
@@ -81,7 +86,7 @@ class _SubmitFormPageState extends State<SubmitFormPage> {
         return null;
       },
       onSaved: (value) {
-        _detail = value!;
+        detail = value!;
       },
     );
   }
@@ -129,6 +134,7 @@ class _SubmitFormPageState extends State<SubmitFormPage> {
                   ),
                   onPressed: () async {
                     result = (await FilePicker.platform.pickFiles(
+                      withData: true,
                       type: FileType.custom,
                       allowedExtensions: ['pdf'],
                     ))!;
@@ -170,10 +176,9 @@ class _SubmitFormPageState extends State<SubmitFormPage> {
 
                           _formKey.currentState!.save();
 
-                          print(_name);
-                          print(_email);
-                          print(_detail);
-                          print('true');
+                          submitFile();
+
+                          Navigator.pop(context);
 
                           //Send to API
                         },
@@ -192,5 +197,20 @@ class _SubmitFormPageState extends State<SubmitFormPage> {
         ),
       ),
     );
+  }
+
+  Future submitFile() async {
+    if (result != null) {
+      Uint8List? fileBytes = result.files.first.bytes;
+      String fileName = result.files.first.name;
+
+      // Upload file
+      TaskSnapshot taskSnapshot = await FirebaseStorage.instance
+          .ref('submission/$author/$fileName')
+          .putData(fileBytes!);
+      String url = await taskSnapshot.ref.getDownloadURL();
+      await SubmissionApi()
+          .addFileToStore(title, author, date, email, detail, '', url);
+    }
   }
 }
