@@ -48,7 +48,7 @@ class _IndexPageState extends State<IndexPage> {
     // await FirebaseAuth.instance.signOut();
     int i = 0;
     bool error = true;
-    while (error == true) {
+    while (i < 5) {
       try {
         await FirebaseFirestore.instance
             .collection('user')
@@ -65,6 +65,7 @@ class _IndexPageState extends State<IndexPage> {
         // await FirebaseAuth.instance.signOut();
         error = true;
       }
+      i++;
     }
   }
 

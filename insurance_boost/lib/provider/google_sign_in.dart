@@ -25,16 +25,18 @@ class GoogleSignInProvider extends ChangeNotifier {
 
     await FirebaseAuth.instance.signInWithCredential(credential);
     notifyListeners();
+
     bool n = true;
     await FirebaseFirestore.instance
         .collection('user')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((value) {
-      print(value);
-      n = false;
+      print(value.exists);
+      n = value.exists;
     });
-    if (n) {
+    if (!n) {
+      print('await UserApi(FirebaseAuth.instance.currentUser!.u');
       await UserApi(FirebaseAuth.instance.currentUser!.uid).addUserToStore();
     }
   }
