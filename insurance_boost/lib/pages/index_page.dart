@@ -6,6 +6,7 @@ import 'package:insurance_boost/models/user.dart';
 import 'package:insurance_boost/pages/home/home_page.dart';
 import 'package:insurance_boost/pages/reward_page.dart';
 import 'package:insurance_boost/pages/submit_form_page.dart';
+import 'package:share_plus/share_plus.dart';
 
 class IndexPage extends StatefulWidget {
   const IndexPage({Key? key}) : super(key: key);
@@ -176,7 +177,12 @@ class _IndexPageState extends State<IndexPage> {
                 new ListTile(
                     title: new Text('Share this App'),
                     trailing: new Icon(Icons.share),
-                    onTap: () {}),
+                    onTap: () async {
+                      final urlPreview =
+                          'https://www.youtube.com/watch?v=CNUBhb_cM6E&t=11s';
+                      await Share.share(
+                          'This is the link for download our app:\n\n$urlPreview');
+                    }),
                 new ListTile(
                     title: new Text('About Us'),
                     trailing: new Icon(Icons.group),
