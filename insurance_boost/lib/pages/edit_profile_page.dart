@@ -58,7 +58,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         .get()
         .then((doc) {
       me = Person(FirebaseAuth.instance.currentUser!.uid, doc['username'],
-          doc['email'], doc['profileUrl'], doc['bio']);
+          doc['email'], doc['profileUrl'], doc['bio'], doc['point']);
     });
     username = me.username;
     email = me.email;

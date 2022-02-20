@@ -51,7 +51,7 @@ class _IndexPageState extends State<IndexPage> {
         .get()
         .then((doc) {
       me = Person(FirebaseAuth.instance.currentUser!.uid, doc['username'],
-          doc['email'], doc['profileUrl'], doc['bio']);
+          doc['email'], doc['profileUrl'], doc['bio'], doc['point']);
     });
   }
 

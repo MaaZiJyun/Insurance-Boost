@@ -37,6 +37,7 @@ class UserApi {
       'email': email,
       'profileUrl': profileUrl,
       'bio': bio,
+      'point': 0,
     });
   }
 }

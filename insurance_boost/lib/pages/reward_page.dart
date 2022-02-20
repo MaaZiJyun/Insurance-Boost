@@ -1,4 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:insurance_boost/models/user.dart';
 
 class DashBoardPage extends StatefulWidget {
   @override
@@ -13,6 +17,8 @@ class _DashBoardPageState extends State<DashBoardPage> {
   late Color _borderContainer;
   bool colorSwitched = false;
   late var logoImage;
+
+  late Person me;
 
   void changeTheme() async {
     if (colorSwitched) {
@@ -58,141 +64,166 @@ class _DashBoardPageState extends State<DashBoardPage> {
 
   @override
   void initState() {
-    changeTheme();
     super.initState();
+    changeTheme();
+    getUser();
+  }
+
+  Future<void> getUser() async {
+    await FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((doc) {
+      me = Person(FirebaseAuth.instance.currentUser!.uid, doc['username'],
+          doc['email'], doc['profileUrl'], doc['bio'], doc['point']);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: GestureDetector(
-          onLongPress: () {
-            if (colorSwitched) {
-              colorSwitched = false;
-            } else {
-              colorSwitched = true;
-            }
-            changeTheme();
-          },
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              // gradient: LinearGradient(
-              //     begin: Alignment.centerLeft,
-              //     end: Alignment.centerRight,
-              //     stops: [0.2, 0.3, 0.5, 0.8],
-              //     colors: _backgroundColor)
-              color: Colors.teal[100],
+    return FutureBuilder(
+      future: getUser(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return Center(
+            child: SpinKitRing(
+              color: Colors.teal,
+              size: 80.0,
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                SizedBox(
-                  height: 20.0,
+          );
+        }
+        return Scaffold(
+          body: SafeArea(
+            child: GestureDetector(
+              onLongPress: () {
+                if (colorSwitched) {
+                  colorSwitched = false;
+                } else {
+                  colorSwitched = true;
+                }
+                changeTheme();
+              },
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  // gradient: LinearGradient(
+                  //     begin: Alignment.centerLeft,
+                  //     end: Alignment.centerRight,
+                  //     stops: [0.2, 0.3, 0.5, 0.8],
+                  //     colors: _backgroundColor)
+                  color: Colors.teal[100],
                 ),
-                // Image.asset(
-                //   logoImage,
-                //   fit: BoxFit.contain,
-                //   height: 100.0,
-                //   width: 100.0,
-                // ),
-                Column(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(
-                      'Hello',
-                      style: TextStyle(fontSize: 18, color: Colors.black),
+                    SizedBox(
+                      height: 20.0,
                     ),
-                    Text(
-                      'James Cashman',
-                      style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold),
+                    // Image.asset(
+                    //   logoImage,
+                    //   fit: BoxFit.contain,
+                    //   height: 100.0,
+                    //   width: 100.0,
+                    // ),
+                    Column(
+                      children: <Widget>[
+                        Text(
+                          'Welcome',
+                          style: TextStyle(fontSize: 18, color: Colors.black),
+                        ),
+                        Text(
+                          me.username,
+                          style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                    Container(
+                      height: 500.0,
+                      width: MediaQuery.of(context).size.width,
+                      // decoration: BoxDecoration(
+                      //     color: _borderContainer,
+                      //     borderRadius: BorderRadius.only(
+                      //         topLeft: Radius.circular(15),
+                      //         topRight: Radius.circular(15))),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(30),
+                              topRight: Radius.circular(30),
+                              // bottomRight: Radius.circular(30),
+                              // bottomLeft: Radius.circular(30),
+                            ),
+                            color: Colors.teal,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+                                height: 80,
+                                child: Center(
+                                  child: Column(
+                                    children: <Widget>[
+                                      Text(
+                                        '${me.point}',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: _textColor,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 50),
+                                      ),
+                                      Text(
+                                        'Reward Points',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: _iconColor, fontSize: 16),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 30,
+                              ),
+                              Table(
+                                // border: TableBorder.symmetric(
+                                //   inside: BorderSide(
+                                //       color: Colors.grey,
+                                //       style: BorderStyle.solid,
+                                //       width: 0.5),
+                                // ),
+                                children: [
+                                  TableRow(children: [
+                                    _actionList(Icons.send, 'Recharge'),
+                                    _actionList(Icons.money, 'Cash'),
+                                  ]),
+                                  TableRow(children: [
+                                    _actionList(Icons.apps, 'packages'),
+                                    _actionList(Icons.history, 'History'),
+                                  ])
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     )
                   ],
                 ),
-                Container(
-                  height: 500.0,
-                  width: MediaQuery.of(context).size.width,
-                  // decoration: BoxDecoration(
-                  //     color: _borderContainer,
-                  //     borderRadius: BorderRadius.only(
-                  //         topLeft: Radius.circular(15),
-                  //         topRight: Radius.circular(15))),
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30),
-                          topRight: Radius.circular(30),
-                          // bottomRight: Radius.circular(30),
-                          // bottomLeft: Radius.circular(30),
-                        ),
-                        color: Colors.teal,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            height: 80,
-                            child: Center(
-                              child: Column(
-                                children: <Widget>[
-                                  Text(
-                                    '790',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: _textColor,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 50),
-                                  ),
-                                  Text(
-                                    'Reward Points',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: _iconColor, fontSize: 16),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Table(
-                            // border: TableBorder.symmetric(
-                            //   inside: BorderSide(
-                            //       color: Colors.grey,
-                            //       style: BorderStyle.solid,
-                            //       width: 0.5),
-                            // ),
-                            children: [
-                              TableRow(children: [
-                                _actionList(Icons.send, 'Recharge'),
-                                _actionList(Icons.money, 'Cash'),
-                              ]),
-                              TableRow(children: [
-                                _actionList(Icons.apps, 'packages'),
-                                _actionList(Icons.history, 'History'),
-                              ])
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                )
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
@@ -204,13 +235,6 @@ class _DashBoardPageState extends State<DashBoardPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          // Image.asset(
-          //   iconPath,
-          //   fit: BoxFit.contain,
-          //   height: 45.0,
-          //   width: 45.0,
-          //   color: _iconColor,
-          // ),
           Icon(
             icon,
             size: 45,
