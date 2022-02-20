@@ -31,8 +31,8 @@ class PackageApi {
     });
   }
 
-  Future buyPackage(String userID, String code, int point, String detail,
-      String category, int price) {
+  Future buyPackage(DateTime date, String userID, String code, int point,
+      String detail, String category, int price) {
     return mypackages.add({
       'userID': userID,
       'code': code,
@@ -40,6 +40,7 @@ class PackageApi {
       'detail': detail,
       'category': category,
       'price': price,
+      'date': date,
     });
   }
 }

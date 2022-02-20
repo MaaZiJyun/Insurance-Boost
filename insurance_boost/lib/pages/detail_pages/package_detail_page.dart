@@ -153,8 +153,14 @@ class _PackageDetailPageState extends State<PackageDetailPage> {
                 });
                 await HistoryApi().newHistory(
                     DateTime.now(), 'Cost', num, widget.price, me.userId);
-                await PackageApi().buyPackage(me.userId, widget.code,
-                    widget.point, widget.detail, widget.category, widget.price);
+                await PackageApi().buyPackage(
+                    DateTime.now(),
+                    me.userId,
+                    widget.code,
+                    widget.point,
+                    widget.detail,
+                    widget.category,
+                    widget.price);
                 Navigator.pop(context);
               },
             ),

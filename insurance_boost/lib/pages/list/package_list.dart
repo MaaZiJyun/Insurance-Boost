@@ -215,8 +215,8 @@ class _PackageListState extends State<PackageList> {
                 });
                 await HistoryApi()
                     .newHistory(DateTime.now(), 'Cost', num, price, me.userId);
-                await PackageApi().buyPackage(
-                    me.userId, code, point, detail, category, price);
+                await PackageApi().buyPackage(DateTime.now(), me.userId, code,
+                    point, detail, category, price);
                 Navigator.pop(context);
               },
             ),
