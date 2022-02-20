@@ -83,6 +83,7 @@ class _SubmissionListState extends State<SubmissionList> {
                                     report: data.docs[index]['report'],
                                     submission: data.docs[index]['submission'],
                                     date: data.docs[index]['date'],
+                                    id: data.docs[index].reference.id,
                                   ),
                                 ),
                               );

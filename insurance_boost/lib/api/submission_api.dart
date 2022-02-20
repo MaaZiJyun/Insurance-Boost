@@ -34,6 +34,8 @@ class SubmissionApi {
       });
   }
 
+  // Future deleteFileToStore()
+
   Future updateFileToStore(String id, String author, DateTime date,
       String title, String report, String submission) async {
     return col.doc(id).update({
