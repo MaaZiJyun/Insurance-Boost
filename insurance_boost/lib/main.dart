@@ -16,7 +16,12 @@ import 'package:insurance_boost/pages/welcome_Screen.dart';
 import 'package:insurance_boost/provider/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
-void main() async {
+// void main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await Firebase.initializeApp();
+//   runApp(const MyApp());
+// }
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
