@@ -35,7 +35,7 @@ Color? wordAndIconDark = Colors.grey[500];
 Color? backGroundLight = Colors.teal[100];
 Color? backGroundDark = Colors.grey[900];
 Color? boxGroundLight = Colors.teal;
-Color? boxGroundDark = Colors.blue;
+Color? boxGroundDark = Colors.teal;
 
 //black word
 Color? blackwordLight = Colors.black;
