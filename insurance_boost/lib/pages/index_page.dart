@@ -171,10 +171,7 @@ class _IndexPageState extends State<IndexPage> {
                           new NetworkImage(me.profileUrl), //图片调取自网络
                     ),
                   ),
-                  decoration: new BoxDecoration(
-                      color: globals.NIGHT_MODE
-                          ? globals.drawUpBgDark
-                          : globals.drawUpBgLight),
+                  decoration: new BoxDecoration(color: Colors.teal),
                 ),
                 new ListTile(
                     title: new Text(

@@ -40,3 +40,7 @@ Color? boxGroundDark = Colors.blue;
 //black word
 Color? blackwordLight = Colors.black;
 Color? blackwordDark = Colors.white;
+
+//drawer
+Color? drawBgDark = Colors.grey[800];
+Color? drawBgLight = Colors.grey[100];
