@@ -21,7 +21,7 @@ import 'package:provider/provider.dart';
 //   await Firebase.initializeApp();
 //   runApp(const MyApp());
 // }
-Future main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());

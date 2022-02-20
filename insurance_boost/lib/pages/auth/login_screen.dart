@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:insurance_boost/api/user_api.dart';
 import 'package:insurance_boost/main.dart';
 import 'package:insurance_boost/pages/auth/signup_sreen.dart';
 import 'package:insurance_boost/pages/welcome_Screen.dart';
@@ -20,7 +22,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  String userEmail = "";
   // Map? _userData;
 
   final emailController = TextEditingController();
@@ -32,6 +33,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
     super.dispose();
   }
+
+  String userEmail = "";
 
   bool _value = false;
   @override
@@ -97,25 +100,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       buttonType: SocialLoginButtonType.facebook,
                       onPressed: () async {
                         await signInWithFacebook();
-
-                        setState(() {});
-
-                        // await FirebaseAuth.instance.signOut();
-                        // userEmail = "";
-                        // await FacebookAuth.instance.logOut();
-                        // setState(() {});
-                        // final result = await FacebookAuth.i
-                        //     .login(permissions: ["public_profile", "email"]);
-
-                        // if (result.status == LoginStatus.success) {
-                        //   final userData = await FacebookAuth.i.getUserData(
-                        //     fields: "email,name",
-                        //   );
-
-                        //   // setState(() {
-                        //   //   _userData = userData;
-                        //   // });
-                        // }
                       },
                     ),
 
@@ -224,7 +208,7 @@ class _LoginScreenState extends State<LoginScreen> {
     navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 
-  Future<UserCredential> signInWithFacebook() async {
+  Future signInWithFacebook() async {
     // Trigger the sign-in flow
     final LoginResult loginResult =
         await FacebookAuth.instance.login(permissions: [
@@ -241,34 +225,20 @@ class _LoginScreenState extends State<LoginScreen> {
     userEmail = userData['email'];
 
     // Once signed in, return the UserCredential
-    return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+    await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+    bool n = true;
+    await FirebaseFirestore.instance
+        .collection('user')
+        // .collection('email')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((value) {
+      print(value);
+      print(value.exists);
+      n = value.exists;
+    });
+    if (!n) {
+      await UserApi(FirebaseAuth.instance.currentUser!.uid).addUserToStore();
+    }
   }
-  //   FirebaseAuth _auth = FirebaseAuth.instance;
-  //   static final FacebookLogin facebookSignIn = new FacebookLogin();
-  //  Future<Null> signInFacebook() async {
-  //   try{
-  //     final FacebookLoginResult result = await facebookSignIn.logIn(['email']);
-  //     switch (result.status) {
-  //       case FacebookLoginStatus.loggedIn:
-  //         final FacebookAccessToken accessToken = result.accessToken;
-  //         final AuthCredential credential =
-  //         FacebookAuthProvider.getCredential(accessToken: accessToken.token);
-  //         final FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
-  //         IdTokenResult idTokenResult = await user.getIdToken(refresh: true);
-  //         setState(() {
-  //           idToken = idTokenResult.token;
-  //         });
-  //         break;
-  //       case FacebookLoginStatus.cancelledByUser:
-  //         print('Login cancelled by the user.');
-  //         break;
-  //       case FacebookLoginStatus.error:
-  //         print('Something went wrong with the login process.\n'
-  //             'Here\'s the error Facebook gave us: ${result.errorMessage}');
-  //         break;
-  //     }
-  //   }catch(e){
-  //     SnackTool.showSnackText(context, "Auth error !");
-  //   }
-  // }
 }
