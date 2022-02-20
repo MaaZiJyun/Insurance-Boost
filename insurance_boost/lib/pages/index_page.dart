@@ -213,7 +213,7 @@ class _IndexPageState extends State<IndexPage> {
                             : Colors.grey[800]),
                     onTap: () async {
                       final urlPreview =
-                          'https://www.youtube.com/watch?v=CNUBhb_cM6E&t=11s';
+                          'https://github.com/MaaZiJyun/Insurance-Boost/raw/main/installer/app-release.apk';
                       await Share.share(
                           'This is the link for download our app:\n\n$urlPreview');
                     }),
