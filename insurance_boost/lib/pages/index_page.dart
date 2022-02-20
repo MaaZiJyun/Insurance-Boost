@@ -233,10 +233,6 @@ class _IndexPageState extends State<IndexPage> {
                     onTap: () {
                       Navigator.pushNamed(context, '/AboutPage');
                     }),
-                // new Divider(
-                //     color: globals.NIGHT_MODE
-                //         ? Colors.grey[200]
-                //         : Colors.grey[800]), //分割线控件
               ],
             ),
           ),

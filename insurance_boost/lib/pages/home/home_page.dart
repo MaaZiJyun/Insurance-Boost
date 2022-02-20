@@ -18,13 +18,24 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String searchItem = '';
+  List<String> submissions = [];
 
   @override
   void initState() {
-    // TODO: implement initState
+    FirebaseFirestore.instance
+        .collection("submission")
+        .where('author', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((value) => value.docs.forEach((element) {
+              print(element.get('submission'));
+            }));
 
     super.initState();
   }
+
+  // List<Widget> _search() {
+  //   List<Widget> list = [];
+  // }
 
   void gotoSubmissionList() {
     Navigator.push(
@@ -145,7 +156,7 @@ class _HomePageState extends State<HomePage> {
                 ? TitleWithMoreBtn(
                     title: "Recomended", press: () => gotoPackageList)
                 : SizedBox(height: 0),
-            searchItem == '' ? RecomendsPackages() : Text(searchItem),
+            searchItem == '' ? RecomendsPackages() : SizedBox(),
             searchItem == ''
                 ? TitleWithMoreBtn(
                     title: "My Submission", press: () => gotoSubmissionList)
