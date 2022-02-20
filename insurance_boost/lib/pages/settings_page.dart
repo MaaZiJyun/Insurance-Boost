@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:insurance_boost/global/global_variables.dart' as globals;
 import 'package:insurance_boost/models/account_option_row.dart';
@@ -15,8 +16,11 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:
+          globals.NIGHT_MODE ? globals.scaffoldDark : globals.scaffoldLight,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        backgroundColor:
+            globals.NIGHT_MODE ? globals.appBarDark : globals.appBarLight,
         elevation: 1,
         leading: IconButton(
           onPressed: () {
@@ -43,7 +47,9 @@ class _SettingsPageState extends State<SettingsPage> {
               children: [
                 Icon(
                   Icons.person,
-                  color: Colors.grey[800],
+                  color: globals.NIGHT_MODE
+                      ? globals.leftIconDark
+                      : globals.leftIconLight,
                 ),
                 SizedBox(
                   width: 8,
@@ -73,14 +79,16 @@ class _SettingsPageState extends State<SettingsPage> {
             Row(
               children: [
                 Icon(
-                  Icons.volume_up_outlined,
-                  color: Colors.grey[800],
+                  Icons.brush,
+                  color: globals.NIGHT_MODE
+                      ? globals.leftIconDark
+                      : globals.leftIconLight,
                 ),
                 SizedBox(
                   width: 8,
                 ),
                 Text(
-                  "Notifications",
+                  "Theme",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ],
@@ -92,13 +100,32 @@ class _SettingsPageState extends State<SettingsPage> {
             SizedBox(
               height: 10,
             ),
-            NotificationOpetionRow(
-              title: "News for you",
-              isActive: globals.NOTE_DELIVER,
-            ),
-            NotificationOpetionRow(
-              title: "Night Mode",
-              isActive: globals.NIGHT_MODE,
+
+            GestureDetector(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Night Mode',
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.grey[600]),
+                  ),
+                  Transform.scale(
+                    scale: 0.7,
+                    child: CupertinoSwitch(
+                        activeColor: Colors.teal,
+                        value: globals.NIGHT_MODE,
+                        onChanged: (bool value) {
+                          setState(() {
+                            globals.NIGHT_MODE = value;
+                            // print(widget.isActive);
+                          });
+                        }),
+                  )
+                ],
+              ),
             ),
             SizedBox(
               height: 50,
