@@ -187,14 +187,16 @@ class _SubmissionDetailPageState extends State<SubmissionDetailPage> {
                         primary: Colors.white,
                       ),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PDFViewerPage(
-                              url: '${widget.submission}',
+                        if (widget.report != '') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PDFViewerPage(
+                                url: '${widget.report}',
+                              ),
                             ),
-                          ),
-                        );
+                          );
+                        }
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
