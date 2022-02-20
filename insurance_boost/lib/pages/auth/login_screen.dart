@@ -95,18 +95,22 @@ class _LoginScreenState extends State<LoginScreen> {
                     SocialLoginButton(
                       buttonType: SocialLoginButtonType.facebook,
                       onPressed: () async {
-                        final result = await FacebookAuth.i
-                            .login(permissions: ["public_profile", "email"]);
+                        await FirebaseAuth.instance.signOut();
+                        userEmail = "";
+                        await FacebookAuth.instance.logOut();
+                        setState(() {});
+                        // final result = await FacebookAuth.i
+                        //     .login(permissions: ["public_profile", "email"]);
 
-                        if (result.status == LoginStatus.success) {
-                          final userData = await FacebookAuth.i.getUserData(
-                            fields: "email,name",
-                          );
+                        // if (result.status == LoginStatus.success) {
+                        //   final userData = await FacebookAuth.i.getUserData(
+                        //     fields: "email,name",
+                        //   );
 
-                          // setState(() {
-                          //   _userData = userData;
-                          // });
-                        }
+                        //   // setState(() {
+                        //   //   _userData = userData;
+                        //   // });
+                        // }
                       },
                     ),
 
@@ -215,20 +219,20 @@ class _LoginScreenState extends State<LoginScreen> {
     navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 
-// Future<UserCredential> signInWithFacebook() async {
-//   // Trigger the sign-in flow
-//   final LoginResult loginResult = await FacebookAuth.instance.login(
-//     permissions: ['email', 'public_profile', 'user_birthday']
-//   );
+  Future<UserCredential> signInWithFacebook() async {
+    // Trigger the sign-in flow
+    final LoginResult loginResult = await FacebookAuth.instance
+        .login(permissions: ['email', 'public_profile', 'user_birthday']);
 
-//   // Create a credential from the access token
-//   final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.token);
+    // Create a credential from the access token
+    final OAuthCredential facebookAuthCredential =
+        FacebookAuthProvider.credential(loginResult.accessToken!.token);
 
-//   final userData = await FacebookAuth.instance.getUserData();
+    final userData = await FacebookAuth.instance.getUserData();
 
-//   userEmail = userData['email'];
+    userEmail = userData['email'];
 
-//   // Once signed in, return the UserCredential
-//   return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
-// }
+    // Once signed in, return the UserCredential
+    return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+  }
 }
