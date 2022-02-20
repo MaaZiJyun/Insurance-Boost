@@ -1,5 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:insurance_boost/api/history_api.dart';
+import 'package:insurance_boost/api/package_api.dart';
+import 'package:insurance_boost/models/user.dart';
 import 'package:insurance_boost/pages/detail_pages/package_detail_page.dart';
 
 class PackageList extends StatefulWidget {
@@ -11,13 +15,24 @@ class PackageList extends StatefulWidget {
 
 class _PackageListState extends State<PackageList> {
   late Stream<QuerySnapshot> packages;
-
+  late Person me;
   @override
   initState() {
     // at the beginning, all users are shown
     packages = FirebaseFirestore.instance.collection("package").snapshots();
-    // _foundUsers = _allUsers;
+    getUser();
     super.initState();
+  }
+
+  Future<void> getUser() async {
+    await FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((doc) {
+      me = Person(FirebaseAuth.instance.currentUser!.uid, doc['username'],
+          doc['email'], doc['profileUrl'], doc['bio'], doc['point']);
+    });
   }
 
   @override
@@ -118,7 +133,27 @@ class _PackageListState extends State<PackageList> {
                                           side: BorderSide(
                                               color: Colors.teal, width: 2),
                                         ),
-                                        onPressed: () {},
+                                        onPressed: () async {
+                                          if (me.point >
+                                              data.docs[index]['price']) {
+                                            await purchasing(
+                                                data.docs[index]['point'],
+                                                data.docs[index]['price'],
+                                                data.docs[index]['code'],
+                                                data.docs[index]['category'],
+                                                data.docs[index]['detail']);
+                                            Navigator.pop(context);
+                                          } else {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              const SnackBar(
+                                                content: Text(
+                                                    'Insufficient balance'),
+                                                backgroundColor: Colors.red,
+                                              ),
+                                            );
+                                          }
+                                        },
                                         child: Text('Buy Now'),
                                       ),
                                     ],
@@ -152,6 +187,42 @@ class _PackageListState extends State<PackageList> {
           ],
         ),
       ),
+    );
+  }
+
+  Future<bool?> purchasing(
+      int point, int price, String code, String category, String detail) {
+    return showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Validation"),
+          content: Text('Are you sure to buy this package?'),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Cancel"),
+              onPressed: () => Navigator.of(context).pop(), // 关闭对话框
+            ),
+            TextButton(
+              child: Text("Yes, I'm sure"),
+              onPressed: () async {
+                final num = me.point - price + point;
+                await FirebaseFirestore.instance
+                    .collection('user')
+                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                    .update({
+                  'point': num,
+                });
+                await HistoryApi()
+                    .newHistory(DateTime.now(), 'Cost', num, price, me.userId);
+                await PackageApi().buyPackage(
+                    me.userId, code, point, detail, category, price);
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
