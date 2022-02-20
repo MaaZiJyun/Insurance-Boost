@@ -11,6 +11,7 @@ import 'package:insurance_boost/pages/home/recomends_packages.dart';
 import 'package:insurance_boost/pages/home/TitleWithMoreBtn.dart';
 import 'package:insurance_boost/pages/list/package_list.dart';
 import 'package:insurance_boost/pages/list/submission_list.dart';
+import 'package:insurance_boost/global/global_variables.dart' as globals;
 
 class HomePage extends StatefulWidget {
   @override
@@ -113,7 +114,8 @@ class _HomePageState extends State<HomePage> {
     // var width = MediaQuery.of(context).size.width;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.teal[50],
+      backgroundColor:
+          globals.NIGHT_MODE ? globals.backGroundDark : globals.backGroundLight,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,7 +135,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                     height: size.height * 0.2 - 27,
                     decoration: BoxDecoration(
-                      color: Colors.teal,
+                      color: globals.NIGHT_MODE
+                          ? globals.boxGroundDark
+                          : globals.boxGroundLight,
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(36),
                         bottomRight: Radius.circular(36),
