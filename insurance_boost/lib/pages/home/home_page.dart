@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:insurance_boost/models/submission.dart';
 import 'package:insurance_boost/models/user.dart';
+import 'package:insurance_boost/pages/detail_pages/submission_detail_page.dart';
 import 'package:insurance_boost/pages/home/my_submissions.dart';
 import 'package:insurance_boost/pages/home/HeaderWithSearchBox.dart';
 import 'package:insurance_boost/pages/home/recomends_packages.dart';
@@ -10,7 +12,6 @@ import 'package:insurance_boost/pages/home/TitleWithMoreBtn.dart';
 import 'package:insurance_boost/pages/list/package_list.dart';
 import 'package:insurance_boost/pages/list/submission(ori)_list.dart';
 import 'package:insurance_boost/pages/list/submission_list.dart';
-import 'package:insurance_boost/global/global_variables.dart' as globals;
 
 class HomePage extends StatefulWidget {
   @override
@@ -19,7 +20,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String searchItem = '';
-  List<String> submissions = [];
+  List<Submission> submissions = [];
+  List<Widget> subList = [];
 
   @override
   void initState() {
@@ -28,15 +30,65 @@ class _HomePageState extends State<HomePage> {
         .where('author', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((value) => value.docs.forEach((element) {
-              print(element.get('submission'));
+              submissions.add(new Submission(
+                  element.reference.id,
+                  element.get('author'),
+                  element.get('date'),
+                  element.get('report'),
+                  element.get('title'),
+                  element.get('detail'),
+                  element.get('email'),
+                  element.get('submission')));
             }));
-
+    print(submissions.length);
     super.initState();
   }
 
-  // List<Widget> _search() {
-  //   List<Widget> list = [];
-  // }
+  List<Widget> search(String searchItem) {
+    List<Widget> list = [];
+    for (var item in submissions) {
+      if (item.title.contains(searchItem)) {
+        list.add(
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SubmissionDetailPage(
+                    title: item.title,
+                    author: item.author,
+                    detail: item.detail,
+                    email: item.email,
+                    report: item.reportUrl,
+                    submission: item.submmissionUrl,
+                    date: item.date,
+                    id: item.Id,
+                  ),
+                ),
+              );
+            },
+            child: new Card(
+              child: ListTile(
+                tileColor: Colors.white,
+                leading: Icon(
+                  Icons.picture_as_pdf,
+                  size: 30,
+                ),
+                title: Text(
+                  '${item.title}',
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+                subtitle: Text(
+                    ' ${item.date.toDate().year}-${item.date.toDate().month}-${item.date.toDate().day}'),
+              ),
+            ),
+          ),
+        );
+      }
+    }
+    return list;
+  }
 
   void gotoSubmissionList() {
     Navigator.push(
@@ -62,8 +114,7 @@ class _HomePageState extends State<HomePage> {
     // var width = MediaQuery.of(context).size.width;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor:
-          globals.NIGHT_MODE ? globals.backGroundDark : globals.backGroundLight,
+      backgroundColor: Colors.teal[50],
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,9 +134,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     height: size.height * 0.2 - 27,
                     decoration: BoxDecoration(
-                      color: globals.NIGHT_MODE
-                          ? globals.boxGroundDark
-                          : globals.boxGroundLight,
+                      color: Colors.teal,
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(36),
                         bottomRight: Radius.circular(36),
@@ -99,9 +148,7 @@ class _HomePageState extends State<HomePage> {
                               .textTheme
                               .headline5
                               ?.copyWith(
-                                  color: globals.NIGHT_MODE
-                                      ? globals.blackwordDark
-                                      : globals.blackwordLight,
+                                  color: Colors.white,
                                   fontWeight: FontWeight.bold),
                         ),
                         Spacer(),
@@ -162,7 +209,13 @@ class _HomePageState extends State<HomePage> {
                 ? TitleWithMoreBtn(
                     title: "Recomended", press: () => gotoPackageList)
                 : SizedBox(height: 0),
-            searchItem == '' ? RecomendsPackages() : SizedBox(),
+            searchItem == ''
+                ? RecomendsPackages()
+                : ListView(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    children: search(searchItem),
+                  ),
             searchItem == ''
                 ? TitleWithMoreBtn(
                     title: "My Submission", press: () => gotoSubmissionList)
