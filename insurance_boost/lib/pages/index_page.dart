@@ -45,14 +45,27 @@ class _IndexPageState extends State<IndexPage> {
   }
 
   Future<void> getUser() async {
-    await FirebaseFirestore.instance
-        .collection('user')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get()
-        .then((doc) {
-      me = Person(FirebaseAuth.instance.currentUser!.uid, doc['username'],
-          doc['email'], doc['profileUrl'], doc['bio'], doc['point']);
-    });
+    // await FirebaseAuth.instance.signOut();
+    int i = 0;
+    bool error = true;
+    while (error == true) {
+      try {
+        await FirebaseFirestore.instance
+            .collection('user')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .get()
+            .then((doc) {
+          me = Person(FirebaseAuth.instance.currentUser!.uid, doc['username'],
+              doc['email'], doc['profileUrl'], doc['bio'], doc['point']);
+        });
+        error = false;
+      } catch (e) {
+        print(e);
+        // initState();
+        // await FirebaseAuth.instance.signOut();
+        error = true;
+      }
+    }
   }
 
   @override
