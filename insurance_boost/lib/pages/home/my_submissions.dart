@@ -53,6 +53,7 @@ class MySubmissions extends StatelessWidget {
                               report: data.docs[index]['report'],
                               submission: data.docs[index]['submission'],
                               date: data.docs[index]['date'],
+                              id: data.docs[index].reference.id,
                             ),
                           ),
                         );

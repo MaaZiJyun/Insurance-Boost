@@ -14,6 +14,7 @@ class SubmissionDetailPage extends StatefulWidget {
   final String report;
   final String submission;
   final Timestamp date;
+  final String id;
 
   String me = '';
 
@@ -25,7 +26,8 @@ class SubmissionDetailPage extends StatefulWidget {
       required this.email,
       required this.report,
       required this.submission,
-      required this.date})
+      required this.date,
+      required this.id})
       : super(key: key);
 
   @override
@@ -217,7 +219,18 @@ class _SubmissionDetailPageState extends State<SubmissionDetailPage> {
               backgroundColor: Colors.red,
               icon: Icon(Icons.delete),
               label: Text('Delete This'),
-              onPressed: () {},
+              onPressed: () async {
+                if (widget.submission != '') {
+                  await FirebaseStorage.instance
+                      .refFromURL(widget.submission)
+                      .delete();
+                }
+                await FirebaseFirestore.instance
+                    .collection('submission')
+                    .doc(widget.id)
+                    .delete();
+                Navigator.pop(context);
+              },
             ),
           );
         });
