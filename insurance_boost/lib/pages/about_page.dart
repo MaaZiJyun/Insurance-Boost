@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:insurance_boost/global/global_variables.dart' as globals;
 
 class AboutPage extends StatelessWidget {
   // const AboutPage({Key? key}) : super(key: key);
@@ -11,9 +12,11 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.teal[50],
+      backgroundColor:
+          globals.NIGHT_MODE ? globals.backGroundDark : globals.backGroundLight,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        backgroundColor:
+            globals.NIGHT_MODE ? globals.appBarDark : globals.appBarLight,
         elevation: 1,
         leading: IconButton(
           onPressed: () {
@@ -21,7 +24,9 @@ class AboutPage extends StatelessWidget {
           },
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.grey[800],
+            color: globals.NIGHT_MODE
+                ? globals.leftIconDark
+                : globals.leftIconLight,
           ),
         ),
       ),
@@ -75,7 +80,9 @@ class AboutPage extends StatelessWidget {
                         Text(
                           details,
                           style: TextStyle(
-                            color: Colors.black,
+                            color: globals.NIGHT_MODE
+                                ? globals.blackwordDark
+                                : globals.blackwordLight,
                             fontSize: 14,
                           ),
                         ),
