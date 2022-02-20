@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -243,10 +242,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
     // Once signed in, return the UserCredential
     return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
-    await FirebaseFirestore.instance
-        .collection('user')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get();
   }
   //   FirebaseAuth _auth = FirebaseAuth.instance;
   //   static final FacebookLogin facebookSignIn = new FacebookLogin();
