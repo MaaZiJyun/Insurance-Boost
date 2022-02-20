@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:insurance_boost/api/user_api.dart';
 import 'package:insurance_boost/models/user.dart';
 import 'package:path/path.dart';
+import 'package:insurance_boost/global/global_variables.dart' as globals;
 
 class EditProfilePage extends StatefulWidget {
   @override
@@ -73,6 +74,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return Scaffold(
+              backgroundColor: globals.NIGHT_MODE
+                  ? globals.scaffoldDark
+                  : globals.scaffoldLight,
               body: Center(
                 child: SpinKitRing(
                   color: Colors.teal,
@@ -82,8 +86,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
             );
           }
           return Scaffold(
+            backgroundColor: globals.NIGHT_MODE
+                ? globals.scaffoldDark
+                : globals.scaffoldLight,
             appBar: AppBar(
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              backgroundColor:
+                  globals.NIGHT_MODE ? globals.appBarDark : globals.appBarLight,
               elevation: 1,
               leading: IconButton(
                 icon: Icon(
@@ -105,8 +113,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   children: [
                     Text(
                       "Edit Profile",
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          color: globals.NIGHT_MODE
+                              ? globals.blackwordDark
+                              : globals.blackwordLight,
+                          fontSize: 25,
+                          fontWeight: FontWeight.w500),
                     ),
                     SizedBox(
                       height: 50,
@@ -176,6 +188,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         OutlineButton(
+                          borderSide: BorderSide(
+                            color: Colors.teal,
+                            width: 2,
+                          ),
                           padding: EdgeInsets.symmetric(horizontal: 50),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)),
@@ -239,7 +255,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
             hintStyle: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
-              color: Colors.black,
+              color: globals.NIGHT_MODE
+                  ? globals.blackwordDark
+                  : globals.blackwordLight,
             )),
       ),
     );
@@ -261,7 +279,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
             hintStyle: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
-              color: Colors.black,
+              color: globals.NIGHT_MODE
+                  ? globals.blackwordDark
+                  : globals.blackwordLight,
             )),
       ),
     );
@@ -278,12 +298,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
         decoration: InputDecoration(
             contentPadding: EdgeInsets.only(bottom: 3),
             labelText: labelText,
+            labelStyle: TextStyle(color: Colors.teal),
+            focusColor: Colors.teal,
             floatingLabelBehavior: FloatingLabelBehavior.always,
             hintText: placeholder,
             hintStyle: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
-              color: Colors.black,
+              color: globals.NIGHT_MODE
+                  ? globals.blackwordDark
+                  : globals.blackwordLight,
             )),
       ),
     );

@@ -35,7 +35,7 @@ Color? wordAndIconDark = Colors.grey[500];
 Color? backGroundLight = Colors.teal[100];
 Color? backGroundDark = Colors.grey[900];
 Color? boxGroundLight = Colors.teal;
-Color? boxGroundDark = Colors.red;
+Color? boxGroundDark = Colors.blue;
 
 //black word
 Color? blackwordLight = Colors.black;
@@ -44,3 +44,8 @@ Color? blackwordDark = Colors.white;
 //drawer
 Color? drawBgDark = Colors.grey[800];
 Color? drawBgLight = Colors.grey[100];
+
+//touxiang
+
+Color? touLight = Colors.grey[800];
+Color? touDark = Colors.grey[100];
