@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:insurance_boost/models/user.dart';
+import 'package:insurance_boost/pages/list/history_list.dart';
+import 'package:insurance_boost/pages/list/package_list.dart';
 
 class DashBoardPage extends StatefulWidget {
   @override
@@ -80,6 +82,24 @@ class _DashBoardPageState extends State<DashBoardPage> {
     });
   }
 
+  void gotoPackageList() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PackageList(),
+      ),
+    );
+  }
+
+  void gotoHistoryList() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => HistoryList(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -108,11 +128,6 @@ class _DashBoardPageState extends State<DashBoardPage> {
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                  // gradient: LinearGradient(
-                  //     begin: Alignment.centerLeft,
-                  //     end: Alignment.centerRight,
-                  //     stops: [0.2, 0.3, 0.5, 0.8],
-                  //     colors: _backgroundColor)
                   color: Colors.teal[100],
                 ),
                 child: Column(
@@ -123,12 +138,6 @@ class _DashBoardPageState extends State<DashBoardPage> {
                     SizedBox(
                       height: 20.0,
                     ),
-                    // Image.asset(
-                    //   logoImage,
-                    //   fit: BoxFit.contain,
-                    //   height: 100.0,
-                    //   width: 100.0,
-                    // ),
                     Column(
                       children: <Widget>[
                         Text(
@@ -169,17 +178,31 @@ class _DashBoardPageState extends State<DashBoardPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Container(
-                                height: 80,
+                                height: 120,
                                 child: Center(
                                   child: Column(
                                     children: <Widget>[
-                                      Text(
-                                        '${me.point}',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            color: _textColor,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 50),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            '${me.point}',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                color: _textColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 80),
+                                          ),
+                                          Text(
+                                            '￥',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                color: _textColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 30),
+                                          ),
+                                        ],
                                       ),
                                       Text(
                                         'Reward Points',
@@ -203,12 +226,28 @@ class _DashBoardPageState extends State<DashBoardPage> {
                                 // ),
                                 children: [
                                   TableRow(children: [
-                                    _actionList(Icons.send, 'Recharge'),
-                                    _actionList(Icons.money, 'Cash'),
+                                    FunctionBlock(
+                                        icon: Icons.send,
+                                        press: () {},
+                                        desc: 'Recharge'),
+                                    FunctionBlock(
+                                        icon: Icons.money,
+                                        press: () {},
+                                        desc: 'Cash'),
                                   ]),
                                   TableRow(children: [
-                                    _actionList(Icons.apps, 'packages'),
-                                    _actionList(Icons.history, 'History'),
+                                    FunctionBlock(
+                                        icon: Icons.apps,
+                                        press: () {
+                                          gotoPackageList();
+                                        },
+                                        desc: 'packages'),
+                                    FunctionBlock(
+                                        icon: Icons.history,
+                                        press: () {
+                                          gotoHistoryList();
+                                        },
+                                        desc: 'History'),
                                   ])
                                 ],
                               ),
@@ -226,28 +265,41 @@ class _DashBoardPageState extends State<DashBoardPage> {
       },
     );
   }
+}
 
-// custom action widget
-  Widget _actionList(IconData icon, String desc) {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Icon(
-            icon,
-            size: 45,
-            color: _iconColor,
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          Text(
-            desc,
-            style: TextStyle(color: _iconColor),
-          )
-        ],
+class FunctionBlock extends StatelessWidget {
+  final IconData icon;
+  final Function press;
+  final String desc;
+
+  const FunctionBlock(
+      {Key? key, required this.icon, required this.press, required this.desc})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => press(),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Icon(
+              icon,
+              size: 45,
+              color: Colors.white,
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Text(
+              desc,
+              style: TextStyle(color: Colors.white),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -11,22 +11,7 @@ class PackageList extends StatefulWidget {
 
 class _PackageListState extends State<PackageList> {
   late Stream<QuerySnapshot> packages;
-  // This holds a list of fiction users
-  // You can use data fetched from a database or a server as well
-  // final List<Map<String, dynamic>> _allUsers = [
-  //   {
-  //     "id": 1,
-  //     "name": 'GX8090',
-  //     "price": 20,
-  //     "detail":
-  //         '·this is the detail of package 1\n·this is the detail of package 1\n·this is the detail of package 1\n',
-  //     "category": 'health care',
-  //     "point": 10,
-  //   },
-  // ];
 
-  // This list holds the data for the list view
-  // List<Map<String, dynamic>> _foundUsers = [];
   @override
   initState() {
     // at the beginning, all users are shown
