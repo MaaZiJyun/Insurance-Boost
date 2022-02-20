@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:insurance_boost/pages/detail_pages/package_detail_page.dart';
+import 'package:insurance_boost/pages/detail_pages/submission_detail_page.dart';
 
 class SubmissionList extends StatefulWidget {
   const SubmissionList({Key? key}) : super(key: key);
@@ -8,52 +11,20 @@ class SubmissionList extends StatefulWidget {
 }
 
 class _SubmissionListState extends State<SubmissionList> {
-  // This holds a list of fiction users
-  // You can use data fetched from a database or a server as well
-  final List<Map<String, dynamic>> _allUsers = [
-    {"id": 1, "name": "Andy", "age": 29},
-    {"id": 2, "name": "Aragon", "age": 40},
-    {"id": 3, "name": "Bob", "age": 5},
-    {"id": 4, "name": "Barbara", "age": 35},
-    {"id": 5, "name": "Candy", "age": 21},
-    {"id": 6, "name": "Colin", "age": 55},
-    {"id": 7, "name": "Audra", "age": 30},
-    {"id": 8, "name": "Banana", "age": 14},
-    {"id": 9, "name": "Caversky", "age": 100},
-    {"id": 10, "name": "Becky", "age": 32},
-  ];
+  late Stream<QuerySnapshot> submissions;
 
-  // This list holds the data for the list view
-  List<Map<String, dynamic>> _foundUsers = [];
   @override
   initState() {
     // at the beginning, all users are shown
-    _foundUsers = _allUsers;
+    submissions =
+        FirebaseFirestore.instance.collection("submission").snapshots();
+    // _foundUsers = _allUsers;
     super.initState();
-  }
-
-  // This function is called whenever the text field changes
-  void _runFilter(String enteredKeyword) {
-    List<Map<String, dynamic>> results = [];
-    if (enteredKeyword.isEmpty) {
-      // if the search field is empty or only contains white-space, we'll display all users
-      results = _allUsers;
-    } else {
-      results = _allUsers
-          .where((user) =>
-              user["name"].toLowerCase().contains(enteredKeyword.toLowerCase()))
-          .toList();
-      // we use the toLowerCase() method to make it case-insensitive
-    }
-
-    // Refresh the UI
-    setState(() {
-      _foundUsers = results;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -72,43 +43,137 @@ class _SubmissionListState extends State<SubmissionList> {
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [
-            TextField(
-              onChanged: (value) => _runFilter(value),
-              decoration: const InputDecoration(
-                labelText: 'Search',
-                suffixIcon: Icon(Icons.search),
+            Expanded(
+              child: StreamBuilder(
+                stream: submissions,
+                builder: (
+                  BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot,
+                ) {
+                  if (!snapshot.hasData) {
+                    return Text('Something nodata ');
+                  } else if (snapshot.hasError) {
+                    return Text('Something error ');
+                  } else if (snapshot.connectionState ==
+                      ConnectionState.waiting) {
+                    return Text('Something noconn ');
+                  } else {
+                    final data = snapshot.requireData;
+                    return ListView.builder(
+                      itemCount: data.size,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          key: ValueKey(data.docs[index].reference.id),
+                          color: Colors.white,
+                          elevation: 2,
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SubmissionDetailPage(
+                                    title: data.docs[index]['title'],
+                                    author: data.docs[index]['author'],
+                                    detail: data.docs[index]['detail'],
+                                    email: data.docs[index]['email'],
+                                    report: data.docs[index]['report'],
+                                    submission: data.docs[index]['submission'],
+                                    date: data.docs[index]['date'],
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(20),
+                              child: Row(
+                                children: [
+                                  Column(
+                                    children: [
+                                      StatusTag(
+                                          text: data.docs[index]['report'] == ''
+                                              ? 'Processing'
+                                              : 'Completed'),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        data.docs[index]['title'],
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        '${data.docs[index]['date'].toDate().year}-${data.docs[index]['date'].toDate().month}-${data.docs[index]['date'].toDate().day}',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        data.docs[index]['detail'],
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }
+                },
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            Expanded(
-              child: _foundUsers.isNotEmpty
-                  ? ListView.builder(
-                      itemCount: _foundUsers.length,
-                      itemBuilder: (context, index) => Card(
-                        key: ValueKey(_foundUsers[index]["id"]),
-                        color: Colors.white,
-                        elevation: 2,
-                        margin: const EdgeInsets.symmetric(vertical: 10),
-                        child: ListTile(
-                          leading: Icon(
-                            Icons.picture_as_pdf,
-                            color: Colors.red[700],
-                            size: 40,
-                          ),
-                          title: Text(_foundUsers[index]['name']),
-                          subtitle: Text(
-                              '${_foundUsers[index]["age"].toString()} years old'),
-                        ),
-                      ),
-                    )
-                  : const Text(
-                      'No results found',
-                      style: TextStyle(fontSize: 24),
-                    ),
-            ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class StatusTag extends StatelessWidget {
+  final String text;
+  late Color color;
+  StatusTag({Key? key, required this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (text == 'Processing') {
+      color = Colors.redAccent;
+    } else {
+      color = Colors.green;
+    }
+    return Container(
+      alignment: Alignment.center,
+      width: 90,
+      height: 90,
+      decoration: BoxDecoration(
+          color: color,
+          // border: Border.all(color: Colors.teal, width: 0.5),
+          borderRadius: BorderRadius.all(Radius.circular(50))),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 15,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );

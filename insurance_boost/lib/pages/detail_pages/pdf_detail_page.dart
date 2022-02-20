@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class PDFViewerPage extends StatefulWidget {
@@ -16,6 +17,7 @@ class PDFViewerPage extends StatefulWidget {
 }
 
 class _PDFViewerPageState extends State<PDFViewerPage> {
+  bool done = false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -34,9 +36,14 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
           ),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () async {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Downloading...')),
+                );
+                await downloadFileExample(widget.url);
+              },
               icon: Icon(
-                Icons.download,
+                done ? Icons.download_done : Icons.download,
                 color: Colors.grey[800],
               ),
             ),
@@ -45,5 +52,27 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
         body: SfPdfViewer.network(widget.url),
       ),
     );
+  }
+
+  Future<void> downloadFileExample(String url) async {
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+    String name =
+        await FirebaseStorage.instance.refFromURL(url).name.toString();
+    File downloadToFile = File('${appDocDir.path}/${name}.pdf');
+    print('${appDocDir.path}/${name}.pdf');
+
+    try {
+      TaskSnapshot task = await FirebaseStorage.instance
+          .refFromURL(url)
+          .writeToFile(downloadToFile)
+          .whenComplete(() {
+        setState(() {
+          done = true;
+        });
+      });
+      print(task);
+    } on FirebaseException catch (e) {
+      print(e);
+    }
   }
 }

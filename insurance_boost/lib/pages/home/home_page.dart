@@ -8,6 +8,7 @@ import 'package:insurance_boost/pages/home/HeaderWithSearchBox.dart';
 import 'package:insurance_boost/pages/home/recomends_packages.dart';
 import 'package:insurance_boost/pages/home/TitleWithMoreBtn.dart';
 import 'package:insurance_boost/pages/list/package_list.dart';
+import 'package:insurance_boost/pages/list/submission(ori)_list.dart';
 import 'package:insurance_boost/pages/list/submission_list.dart';
 
 class HomePage extends StatefulWidget {

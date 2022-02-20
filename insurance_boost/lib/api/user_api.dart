@@ -1,7 +1,10 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+import '../models/user.dart';
 
 class UserApi {
   final String uid;
@@ -24,6 +27,21 @@ class UserApi {
         })
         .then((value) => print('User $uid Update'))
         .catchError((error) => print("Failed to update user: $error"));
+  }
+
+  Future<Person?> getMe() async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('user')
+          .doc(uid)
+          .get()
+          .then((doc) {
+        return Person(FirebaseAuth.instance.currentUser!.uid, doc['username'],
+            doc['email'], doc['profileUrl'], doc['bio'], doc['point']);
+      });
+    } catch (e) {
+      return Person('', '', '', '', '', -1);
+    }
   }
 
   Future addUserToStore() async {
