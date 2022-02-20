@@ -96,7 +96,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
               leading: IconButton(
                 icon: Icon(
                   Icons.arrow_back,
-                  color: Colors.grey[800],
+                  color:
+                      globals.NIGHT_MODE ? Colors.grey[200] : Colors.grey[800],
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -247,9 +248,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
         onSaved: (val) {
           username = val!;
         },
+        style: TextStyle(
+            color: globals.NIGHT_MODE ? Colors.grey[200] : Colors.black),
         decoration: InputDecoration(
             contentPadding: EdgeInsets.only(bottom: 3),
             labelText: labelText,
+            labelStyle: TextStyle(
+                color: globals.NIGHT_MODE ? Colors.grey[200] : Colors.black),
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                    color: globals.NIGHT_MODE ? Colors.teal : Colors.black)),
+            enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                    color: globals.NIGHT_MODE ? Colors.grey : Colors.black)),
             floatingLabelBehavior: FloatingLabelBehavior.always,
             hintText: placeholder,
             hintStyle: TextStyle(
@@ -271,9 +282,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
         onSaved: (val) {
           email = val!;
         },
+        style: TextStyle(
+            color: globals.NIGHT_MODE ? Colors.grey[200] : Colors.black),
         decoration: InputDecoration(
             contentPadding: EdgeInsets.only(bottom: 3),
             labelText: labelText,
+            labelStyle: TextStyle(
+                color: globals.NIGHT_MODE ? Colors.grey[200] : Colors.black),
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                    color: globals.NIGHT_MODE ? Colors.teal : Colors.black)),
+            enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                    color: globals.NIGHT_MODE ? Colors.grey : Colors.black)),
             floatingLabelBehavior: FloatingLabelBehavior.always,
             hintText: placeholder,
             hintStyle: TextStyle(
@@ -295,11 +316,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
         onSaved: (val) {
           bio = val!;
         },
+        style: TextStyle(
+            color: globals.NIGHT_MODE ? Colors.grey[200] : Colors.black),
         decoration: InputDecoration(
             contentPadding: EdgeInsets.only(bottom: 3),
             labelText: labelText,
-            labelStyle: TextStyle(color: Colors.teal),
-            focusColor: Colors.teal,
+            labelStyle: TextStyle(
+                color: globals.NIGHT_MODE ? Colors.grey[200] : Colors.black),
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                    color: globals.NIGHT_MODE ? Colors.teal : Colors.black)),
+            enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                    color: globals.NIGHT_MODE ? Colors.grey : Colors.black)),
             floatingLabelBehavior: FloatingLabelBehavior.always,
             hintText: placeholder,
             hintStyle: TextStyle(
