@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:insurance_boost/global/global_variables.dart' as globals;
 
 // import '../../../constants.dart';
 
@@ -17,7 +18,14 @@ class TitleWithMoreBtn extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: <Widget>[
-          Text(title),
+          Text(
+            title,
+            style: TextStyle(
+                fontSize: 18,
+                color: globals.NIGHT_MODE
+                    ? globals.blackwordDark
+                    : globals.blackwordLight),
+          ),
           Spacer(),
           TextButton(
             style: TextButton.styleFrom(
