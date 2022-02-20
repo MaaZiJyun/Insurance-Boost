@@ -7,6 +7,7 @@ import 'package:insurance_boost/models/user.dart';
 import 'package:insurance_boost/pages/list/history_list.dart';
 import 'package:insurance_boost/pages/list/package_list.dart';
 import 'package:insurance_boost/pages/list/package_my_list.dart';
+import 'package:insurance_boost/global/global_variables.dart' as globals;
 
 class DashBoardPage extends StatefulWidget {
   @override
@@ -119,7 +120,9 @@ class _DashBoardPageState extends State<DashBoardPage> {
           );
         }
         return Scaffold(
-          backgroundColor: Colors.teal[100],
+          backgroundColor: globals.NIGHT_MODE
+              ? globals.backGroundDark
+              : globals.backGroundLight,
           body: SafeArea(
             child: SingleChildScrollView(
               child: Container(
@@ -134,13 +137,19 @@ class _DashBoardPageState extends State<DashBoardPage> {
                       children: <Widget>[
                         Text(
                           'Welcome',
-                          style: TextStyle(fontSize: 18, color: Colors.black),
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: globals.NIGHT_MODE
+                                  ? globals.blackwordDark
+                                  : globals.blackwordLight),
                         ),
                         Text(
                           me.username,
                           style: TextStyle(
                               fontSize: 24,
-                              color: Colors.black,
+                              color: globals.NIGHT_MODE
+                                  ? globals.blackwordDark
+                                  : globals.blackwordLight,
                               fontWeight: FontWeight.bold),
                         )
                       ],
@@ -160,7 +169,9 @@ class _DashBoardPageState extends State<DashBoardPage> {
                               // bottomRight: Radius.circular(30),
                               // bottomLeft: Radius.circular(30),
                             ),
-                            color: Colors.teal,
+                            color: globals.NIGHT_MODE
+                                ? globals.boxGroundDark
+                                : globals.boxGroundLight,
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -381,7 +392,9 @@ class FunctionBlock extends StatelessWidget {
             Icon(
               icon,
               size: 45,
-              color: Colors.white,
+              color:
+                  globals.NIGHT_MODE ? Colors.white : globals.wordAndIconLight,
+              // color: Colors.white,
             ),
             SizedBox(
               height: 8,
