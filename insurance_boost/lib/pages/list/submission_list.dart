@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:insurance_boost/pages/detail_pages/package_detail_page.dart';
 import 'package:insurance_boost/pages/detail_pages/submission_detail_page.dart';
@@ -16,8 +17,10 @@ class _SubmissionListState extends State<SubmissionList> {
   @override
   initState() {
     // at the beginning, all users are shown
-    submissions =
-        FirebaseFirestore.instance.collection("submission").snapshots();
+    submissions = FirebaseFirestore.instance
+        .collection("submission")
+        .where('author', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .snapshots();
     // _foundUsers = _allUsers;
     super.initState();
   }
