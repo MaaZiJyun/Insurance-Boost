@@ -28,7 +28,10 @@ class _SettingsPageState extends State<SettingsPage> {
           },
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.grey[800],
+            color: globals.NIGHT_MODE
+                ? globals.leftIconDark
+                : globals.leftIconLight,
+            // color: Colors.grey[800],
           ),
         ),
       ),
@@ -38,7 +41,12 @@ class _SettingsPageState extends State<SettingsPage> {
           children: [
             Text(
               "Settings",
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+              style: TextStyle(
+                  color: globals.NIGHT_MODE
+                      ? globals.firstLevelTitleDark
+                      : globals.firstLevelTitleLight,
+                  fontSize: 25,
+                  fontWeight: FontWeight.w500),
             ),
             SizedBox(
               height: 50,
@@ -56,7 +64,12 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 Text(
                   "Account",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: globals.NIGHT_MODE
+                          ? globals.firstLevelTitleDark
+                          : globals.firstLevelTitleLight,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -71,8 +84,8 @@ class _SettingsPageState extends State<SettingsPage> {
             AccountOptionRow(
               title: 'My Profile',
             ),
-            ChangePwdRow(title: "Change Password"),
-            buildAccountOptionRow(context, "Language"),
+            // ChangePwdRow(title: "Change Password"),
+            // buildAccountOptionRow(context, "Language"),
             SizedBox(
               height: 50,
             ),
@@ -89,7 +102,12 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 Text(
                   "Theme",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: globals.NIGHT_MODE
+                          ? globals.firstLevelTitleDark
+                          : globals.firstLevelTitleLight,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
                 ),
               ],
             ),

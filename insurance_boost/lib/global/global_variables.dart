@@ -8,13 +8,35 @@ bool NOTE_DELIVER = true;
 
 Person? me;
 
-Color? scaffoldLight = Colors.grey[100];
+//bar
 Color? appBarLight = Colors.grey[200];
-
-Color? scaffoldDark = Colors.grey[900];
 Color? appBarDark = Colors.grey[900];
 
-//setting
-Color? leftIconLight = Colors.grey[500];
+//scaffold
+Color? scaffoldLight = Colors.grey[100];
+Color? scaffoldDark = Colors.grey[900];
 
-Color? leftIconDark = Colors.grey[800];
+//setting
+Color? leftIconLight = Colors.black;
+
+Color? leftIconDark = Colors.grey[500];
+
+//标题
+
+Color? firstLevelTitleLight = Colors.black;
+
+Color? firstLevelTitleDark = Colors.grey[500];
+
+//reward icons and words
+Color? wordAndIconLight = Color.fromARGB(255, 255, 255, 255);
+Color? wordAndIconDark = Colors.grey[500];
+
+//reward backGround
+Color? backGroundLight = Colors.teal[100];
+Color? backGroundDark = Colors.grey[900];
+Color? boxGroundLight = Colors.teal;
+Color? boxGroundDark = Colors.blue;
+
+//black word
+Color? blackwordLight = Colors.black;
+Color? blackwordDark = Colors.white;
