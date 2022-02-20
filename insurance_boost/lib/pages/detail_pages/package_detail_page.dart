@@ -1,4 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:insurance_boost/api/history_api.dart';
+import 'package:insurance_boost/api/package_api.dart';
+import 'package:insurance_boost/models/user.dart';
 
 class PackageDetailPage extends StatefulWidget {
   final String id;
@@ -8,7 +13,7 @@ class PackageDetailPage extends StatefulWidget {
   final int point;
   final String code;
 
-  const PackageDetailPage({
+  PackageDetailPage({
     Key? key,
     required this.id,
     required this.detail,
@@ -23,6 +28,25 @@ class PackageDetailPage extends StatefulWidget {
 }
 
 class _PackageDetailPageState extends State<PackageDetailPage> {
+  late Person me;
+
+  @override
+  void initState() {
+    super.initState();
+    getUser();
+  }
+
+  Future<void> getUser() async {
+    await FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((doc) {
+      me = Person(FirebaseAuth.instance.currentUser!.uid, doc['username'],
+          doc['email'], doc['profileUrl'], doc['bio'], doc['point']);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -86,10 +110,57 @@ class _PackageDetailPageState extends State<PackageDetailPage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Colors.teal,
-        onPressed: () {},
+        onPressed: () async {
+          if (me.point > widget.price) {
+            await purchasing();
+            Navigator.pop(context);
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Insufficient balance'),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        },
         label: Text('Buy Now'),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
+  }
+
+  Future<bool?> purchasing() {
+    return showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Validation"),
+          content: Text('Are you sure to buy this package?'),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Cancel"),
+              onPressed: () => Navigator.of(context).pop(), // 关闭对话框
+            ),
+            TextButton(
+              child: Text("Yes, I'm sure"),
+              onPressed: () async {
+                final num = me.point - widget.price + widget.point;
+                await FirebaseFirestore.instance
+                    .collection('user')
+                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                    .update({
+                  'point': num,
+                });
+                await HistoryApi().newHistory(
+                    DateTime.now(), 'Cost', num, widget.price, me.userId);
+                await PackageApi().buyPackage(me.userId, widget.code,
+                    widget.point, widget.detail, widget.category, widget.price);
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

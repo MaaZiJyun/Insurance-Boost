@@ -2,9 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:insurance_boost/api/history_api.dart';
 import 'package:insurance_boost/models/user.dart';
 import 'package:insurance_boost/pages/list/history_list.dart';
 import 'package:insurance_boost/pages/list/package_list.dart';
+import 'package:insurance_boost/pages/list/package_my_list.dart';
 
 class DashBoardPage extends StatefulWidget {
   @override
@@ -21,6 +23,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
   late var logoImage;
 
   late Person me;
+  int num = 0;
 
   void changeTheme() async {
     if (colorSwitched) {
@@ -82,11 +85,11 @@ class _DashBoardPageState extends State<DashBoardPage> {
     });
   }
 
-  void gotoPackageList() {
+  void gotoMyPackageList() {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => PackageList(),
+        builder: (context) => PackageMyList(),
       ),
     );
   }
@@ -102,6 +105,8 @@ class _DashBoardPageState extends State<DashBoardPage> {
 
   @override
   Widget build(BuildContext context) {
+    final h = MediaQuery.of(context).size.height;
+    final w = MediaQuery.of(context).size.width;
     return FutureBuilder(
       future: getUser(),
       builder: (context, snapshot) {
@@ -114,29 +119,16 @@ class _DashBoardPageState extends State<DashBoardPage> {
           );
         }
         return Scaffold(
+          backgroundColor: Colors.teal[100],
           body: SafeArea(
-            child: GestureDetector(
-              onLongPress: () {
-                if (colorSwitched) {
-                  colorSwitched = false;
-                } else {
-                  colorSwitched = true;
-                }
-                changeTheme();
-              },
+            child: SingleChildScrollView(
               child: Container(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  color: Colors.teal[100],
-                ),
                 child: Column(
-                  mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     SizedBox(
-                      height: 20.0,
+                      height: 50.0,
                     ),
                     Column(
                       children: <Widget>[
@@ -153,14 +145,11 @@ class _DashBoardPageState extends State<DashBoardPage> {
                         )
                       ],
                     ),
+                    SizedBox(
+                      height: 50.0,
+                    ),
                     Container(
-                      height: 500.0,
-                      width: MediaQuery.of(context).size.width,
-                      // decoration: BoxDecoration(
-                      //     color: _borderContainer,
-                      //     borderRadius: BorderRadius.only(
-                      //         topLeft: Radius.circular(15),
-                      //         topRight: Radius.circular(15))),
+                      height: h / 1.6,
                       child: Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: Container(
@@ -192,7 +181,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
                                             style: TextStyle(
                                                 color: _textColor,
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 80),
+                                                fontSize: 60),
                                           ),
                                           Text(
                                             '￥',
@@ -228,20 +217,24 @@ class _DashBoardPageState extends State<DashBoardPage> {
                                   TableRow(children: [
                                     FunctionBlock(
                                         icon: Icons.send,
-                                        press: () {},
+                                        press: () {
+                                          recharging();
+                                        },
                                         desc: 'Recharge'),
                                     FunctionBlock(
                                         icon: Icons.money,
-                                        press: () {},
+                                        press: () {
+                                          cashreturing();
+                                        },
                                         desc: 'Cash'),
                                   ]),
                                   TableRow(children: [
                                     FunctionBlock(
                                         icon: Icons.apps,
                                         press: () {
-                                          gotoPackageList();
+                                          gotoMyPackageList();
                                         },
-                                        desc: 'packages'),
+                                        desc: 'My packages'),
                                     FunctionBlock(
                                         icon: Icons.history,
                                         press: () {
@@ -261,6 +254,105 @@ class _DashBoardPageState extends State<DashBoardPage> {
               ),
             ),
           ),
+        );
+      },
+    );
+  }
+
+  Future<bool?> recharging() {
+    return showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Recharging Window"),
+          content: TextField(
+            autofocus: true,
+            keyboardType: TextInputType.number,
+            onChanged: (val) {
+              num = int.parse(val);
+            },
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Not now"),
+              onPressed: () => Navigator.of(context).pop(), // 关闭对话框
+            ),
+            TextButton(
+              child: Text("Recharge"),
+              onPressed: () async {
+                int price = num;
+                num = me.point + price;
+
+                await FirebaseFirestore.instance
+                    .collection('user')
+                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                    .update({
+                  'point': num,
+                });
+
+                await HistoryApi().newHistory(
+                    DateTime.now(), 'Recharge', num, price, me.userId);
+                num = 0;
+                //关闭对话框并返回true
+                Navigator.of(context).pop();
+                setState(() {});
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<bool?> cashreturing() {
+    return showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Cash Window"),
+          content: TextField(
+            autofocus: true,
+            keyboardType: TextInputType.number,
+            onChanged: (val) {
+              num = int.parse(val);
+            },
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Not now"),
+              onPressed: () => Navigator.of(context).pop(), // 关闭对话框
+            ),
+            TextButton(
+              child: Text("Cash"),
+              onPressed: () async {
+                if (me.point > num) {
+                  int price = num;
+                  num = me.point - price;
+
+                  await FirebaseFirestore.instance
+                      .collection('user')
+                      .doc(FirebaseAuth.instance.currentUser!.uid)
+                      .update({
+                    'point': num,
+                  });
+
+                  await HistoryApi().newHistory(
+                      DateTime.now(), 'Cash', num, price, me.userId);
+                  num = 0;
+                  //关闭对话框并返回true
+                  Navigator.of(context).pop();
+                  setState(() {});
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Insufficient balance'),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                }
+              },
+            ),
+          ],
         );
       },
     );

@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class PackageApi {
+class HistoryApi {
   final CollectionReference col =
       FirebaseFirestore.instance.collection('history');
 
-  Future newHistory(String event, int num, int price, String userId) async {
+  Future newHistory(
+      DateTime date, String event, int num, int price, String userId) async {
     return col.add({
+      'date': date,
       'event': event,
       'price': price,
       'point': num,
