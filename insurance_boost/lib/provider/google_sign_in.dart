@@ -31,10 +31,8 @@ class GoogleSignInProvider extends ChangeNotifier {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((value) {
-      print('this is value: ${value.data()}');
-      if (value.data() != null) {
-        n = false;
-      }
+      print(value);
+      n = false;
     });
     if (n) {
       await UserApi(FirebaseAuth.instance.currentUser!.uid).addUserToStore();
